@@ -1,0 +1,59 @@
+	        ----
+	      /      \
+             |   AJ   | 
+              \      /
+                ---- 
+charecter info
+-----------------
+Hp 
+Base Attack 
+Movement 
+Items (Useable or not?)
+gold
+Exp
+Ability Cards (Top or bottom effect, then primary or secondary effect)
+Level Up
+Battle Goals
+Perks (and checkmark progress) 
+Discard Pile 
+Lost Pile 
+
+personal quest
+
+
+party?
+-------------
+rep
+road events 
+city event
+
+gloomhaven
+----------------
+prosperity level
+retired charecters
+record book
+
+
+Enemies
+--------
+Hp
+attack
+movement
+Elite varients
+Placement
+Focus (Targeted charecter)
+Gold drop reward 
+Ability Cards
+
+Battle Sequence
+----------------
+Inititive 
+Chosen Action of Charecter ability 
+gold drop locations
+exp given durring certian actions 
+traps
+hazzards  
+element infusion
+attack modifiers 
+movment (reprinting tile board)
+
