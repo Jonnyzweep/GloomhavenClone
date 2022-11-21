@@ -1,0 +1,17 @@
+As a player, I want play Gloomhaven on a program so that the program can speed up the parts that would be slow on paper
+and make the game easier to play without breaking the rules
+
+	As a player, I want the progran to keep track on my player character (p.c.) stats and inventory so that I 
+can focus on the game and not create human errors in my p.cc sheet.
+
+	As a player, I want the program to keep track of events so that future interactions and events will line up
+with my p.c. progress in the game, and all available events are in play.
+
+	As a player, I want the program to keep track of the group rep so that the city Gloomhaven level is correct when I
+enter it next.
+
+	As a player, I want the program to simulate the combat so that enemies will die at the right amount of damage
+and my p.c. health with also be proberly managed.
+
+	As a player, I want the program to keep track of the card piles so that only the playable cards are in play
+during the proper time.
