@@ -1,0 +1,4 @@
+As a developer, I want to make a simple display  so that players can visualize the game. 
+As a player, I want to view my abilities and inventory so that I can keep track of my items and actions. 
+As a developer, I want to create a good agression mechanic so that the enemies move efficiently to their targets. 
+As a player, I want to have the option to change difficulty so that I can tailor my own experience. 
