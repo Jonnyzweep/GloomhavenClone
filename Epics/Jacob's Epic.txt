@@ -1,1 +1,16 @@
 
+
+As a developer, I want users to be able to select different characters so that they are different scenarios that could happen throughout the game. 
+As a user, I want to be able to easily understand my options in different sections of the game
+
+Character Traits: Health, Attack, Movement Speed, Items, Perks
+Enemy Traits: Health, Attack, Movement Speed, Reward, Abilities
+Battles: Traps, Rewards
+
+Ideally we can choose the character which would come with a couple of character traits and buffs that would affect the game play as opposed to selecting different characters. Then we can draw cards which will be shuffled into different orders each round so we will get a different card each time we need to draw one. The cards can include abilities and attacks as well as negative effects and scenarios to our characters. 
+
+The character should be able to travel down different paths that contain unknown scenarios that would sidetrack our character from their goal. These would be side quests or battles as well as different tracks on our board game. 
+
+Enemies should be strategic but not too difficult to defeat as it may deter certain players if they are not balanced. They should have a common attack so that players can learn how to defeat them but not too common that it loses the fun and risk.
+
+The game should have a victory for our character to show it has gone through all the necessary quests and defeated the enemies. 
