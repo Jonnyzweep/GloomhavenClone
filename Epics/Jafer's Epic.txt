@@ -1,0 +1,10 @@
+As a player, I want a more simplified display of the combat system so that all possible moves I can make are laid out to me clearly.
+
+As a developer, I want to create a UI that is easy to interact with for all players.
+
+As a developer, I want to create a board that will be neatly organized and easily understood.
+
+As a developer, I want to make sure that a player's status (health, inventory, etc.) is 
+  kept track of and managed well so that they may check it at any time during the game.
+
+As a player, I want the scenario set up to be quick and easily explained.
