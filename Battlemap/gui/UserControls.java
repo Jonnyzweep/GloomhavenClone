@@ -1,4 +1,7 @@
-package gui;
+package com.mycompany.gloomhaven.Battlemap.gui;
+
+import com.mycompany.gloomhaven.Battlemap.events.EventManager;
+import com.mycompany.gloomhaven.Battlemap.events.TickEnd;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -10,8 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import events.EventManager;
-import events.TickEnd;
 
 @SuppressWarnings("serial")
 public class UserControls extends JPanel implements Observer

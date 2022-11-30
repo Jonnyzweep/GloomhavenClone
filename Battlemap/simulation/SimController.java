@@ -1,11 +1,12 @@
-package simulation;
+package com.mycompany.gloomhaven.Battlemap.simulation;
 
-import events.EventManager;
-import gui.Frame;
+
+import com.mycompany.gloomhaven.Battlemap.events.EventManager;
+import com.mycompany.gloomhaven.Battlemap.gui.Frame;
 
 public class SimController {
 
-	static Simulation simulation;
+	static Sim sim;
 
 	Frame frame;
 	static EventManager emgr;
@@ -13,10 +14,10 @@ public class SimController {
 
 
 	public static void main(String[] args) {
-		simulation = new Simulation();
-		Frame frame = new Frame(simulation.getWorld(), emgr);
+		sim = new Sim();
+		Frame frame = new Frame(sim.getWorld(), emgr);
 		frame.open();
-		simulation.addObserver(frame.getUserControls());
+		sim.addObserver(frame.getUserControls());
 
 
 	} 

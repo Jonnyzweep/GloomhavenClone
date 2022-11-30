@@ -1,4 +1,4 @@
-package elements;
+package com.mycompany.gloomhaven.Battlemap.elements;
 
 public class Enemies {
 	private int pos[] = new int[2];

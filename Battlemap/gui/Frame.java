@@ -1,4 +1,4 @@
-package gui;
+package com.mycompany.gloomhaven.Battlemap.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import elements.World;
-import events.EventManager;
+import com.mycompany.gloomhaven.Battlemap.elements.World;
+import com.mycompany.gloomhaven.Battlemap.events.EventManager;
 
 public class Frame extends JFrame
 {

@@ -1,4 +1,6 @@
-package gui;
+package com.mycompany.gloomhaven.Battlemap.gui;
+
+import com.mycompany.gloomhaven.Battlemap.elements.World;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -6,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import elements.*;
+
 
 public class Grid extends JPanel {
 	World world;
@@ -111,7 +113,7 @@ public class Grid extends JPanel {
 				if (world.getHex(i, j).hasAgent())
 				{
 					try {
-						bi = ImageIO.read(new File("src/images/logs.png"));
+						bi = ImageIO.read(new File("Battlemap/images/logs.png"));
 					}
 					catch (IOException e) {
 						throw new RuntimeException(e);

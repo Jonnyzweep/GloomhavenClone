@@ -1,14 +1,18 @@
-package simulation;
+package com.mycompany.gloomhaven.Battlemap.simulation;
+
+import com.mycompany.gloomhaven.Battlemap.elements.Enemies;
+import com.mycompany.gloomhaven.Battlemap.elements.Log;
+import com.mycompany.gloomhaven.Battlemap.elements.World;
+import com.mycompany.gloomhaven.Battlemap.events.TickEnd;
+import com.mycompany.gloomhaven.Battlemap.events.TickStart;
+import com.mycompany.gloomhaven.Battlemap.gui.Grid;
+
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
 
-import elements.*;
-import events.*;
-import gui.Grid;
-
-public class Simulation extends Observable implements Runnable {
+public class Sim extends Observable implements Runnable {
 	private int sizeX = 10;
 	private int sizeY = 7;
 	private int maxTicks = 50;
@@ -21,7 +25,7 @@ public class Simulation extends Observable implements Runnable {
 	Grid grid;
 	Integer tick;
 
-	public Simulation() {
+	public Sim() {
 		allLog = new ArrayList<Log>(numLog);
 		allEnemies = new ArrayList<Enemies>(numLog);
 		world = new World(sizeX, sizeY);

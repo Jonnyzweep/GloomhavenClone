@@ -1,4 +1,4 @@
-package events;
+package com.mycompany.gloomhaven.Battlemap.events;
 
 public class TickEnd
 {

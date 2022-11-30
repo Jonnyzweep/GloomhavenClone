@@ -1,6 +1,8 @@
-package elements;
+package com.mycompany.gloomhaven.Battlemap.elements;
+
 
 import java.util.Observable;
+import com.mycompany.gloomhaven.Battlemap.elements.HexTile;
 
 public class World extends Observable 
 {
