@@ -139,7 +139,22 @@ public class MapUnits {
 
 		else if(pos[2] == 8) // players
 		{
-			return "Corridor";
+			if(pos[3] == 0)
+			{
+				return "Harrower Infester";
+			}
+			else if(pos[3] == 1)
+			{
+				return "Forest Imp";
+			}
+			else if(pos[3] == 2)
+			{
+				return "Earth Demon";
+			}
+			else if(pos[3] == 3)
+			{
+				return null;
+			}
 		}
 
 		return null;

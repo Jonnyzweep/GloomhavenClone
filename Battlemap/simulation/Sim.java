@@ -36,17 +36,17 @@ public class Sim extends Observable implements Runnable {
 		allUnits.add(new MapUnits(4, 5, 5, 0));
 		allUnits.add(new MapUnits(4, 6,5 , 0));
 		allUnits.add(new MapUnits(1, 0,8,0));
-		allUnits.add(new MapUnits(8, 0,8,0));
-		allUnits.add(new MapUnits(1, 1,8,0));
-		allUnits.add(new MapUnits(7, 1,8,0));
-		allUnits.add(new MapUnits(8, 1,8,0));
-		allUnits.add(new MapUnits(1, 4,8,0));
+		allUnits.add(new MapUnits(8, 0,8,1));
+		allUnits.add(new MapUnits(1, 1,8,1));
+		allUnits.add(new MapUnits(7, 1,8,1));
+		allUnits.add(new MapUnits(8, 1,8,2));
+		allUnits.add(new MapUnits(1, 4,8,1));
 		allUnits.add(new MapUnits(8, 4,8,0));
-		allUnits.add(new MapUnits(9, 4,8,0));
-		allUnits.add(new MapUnits(0, 5,8,0));
-		allUnits.add(new MapUnits(9, 5,8,0));
-		allUnits.add(new MapUnits(1, 6,8,0));
-		allUnits.add(new MapUnits(8, 6,8,0));
+		allUnits.add(new MapUnits(9, 4,8,1));
+		allUnits.add(new MapUnits(0, 5,8,2));
+		allUnits.add(new MapUnits(9, 5,8,1));
+		allUnits.add(new MapUnits(1, 6,8,1));
+		allUnits.add(new MapUnits(8, 6,8,2));
 		allUnits.add(new MapUnits(9, 0,7,0));
 
 

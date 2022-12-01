@@ -132,10 +132,40 @@ public class Grid extends JPanel {
 							throw new RuntimeException(e);
 						}
 					}
-					g.drawImage(bi, ((((int) centres[0])) - 10), (((int) centres[1]) - 10), 20, 20, null);
+					g.drawImage(bi, ((((int) centres[0])) - 19), (((int) centres[1]) - 19), 40, 40, null);
 					g.setColor(Color.yellow);
 					g.drawPolygon(poly);
 				}
+				else if (world.getHex(i, j).getType() == 8)
+				{
+					if(world.getHex(i, j).getName() == 0) {
+						try {
+							bi = ImageIO.read(new File("Battlemap/images/harrower-infester.png"));
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
+					}
+					else if(world.getHex(i, j).getName() == 1) {
+						try {
+							bi = ImageIO.read(new File("Battlemap/images/forest-imp.png"));
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
+					}
+					else if(world.getHex(i, j).getName() == 2) {
+						try {
+							bi = ImageIO.read(new File("Battlemap/images/earth-demon.png"));
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
+					}
+
+					g.drawImage(bi, ((((int) centres[0])) - 32), (((int) centres[1]) - 32), 65, 65, null);
+					g.setColor(Color.red);
+					g.drawPolygon(poly);
+				}
+
+
 				else {
 					g.setColor(Color.black);
 					g.drawPolygon(poly);
