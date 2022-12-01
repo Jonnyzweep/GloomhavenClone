@@ -123,6 +123,35 @@ public class Grid extends JPanel {
 					g.setColor(Color.pink);
 					g.drawPolygon(poly);
 				}
+
+				else if (world.getHex(i, j).getType() == 6)
+				{
+					if(world.getHex(i, j).getName() == 0) {
+						try {
+							bi = ImageIO.read(new File("Battlemap/images/Bush.png"));
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
+						g.drawImage(bi, ((((int) centres[0])) - 15), (((int) centres[1]) - 15), 30, 30, null);
+						g.setColor(Color.green);
+						g.drawPolygon(poly);
+					}
+					else if(world.getHex(i, j).getName() == 1) {
+						try {
+							bi = ImageIO.read(new File("Battlemap/images/tree.png"));
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
+						g.drawImage(bi, ((((int) centres[0])) - 24), (((int) centres[1]) - 24), 48, 48, null);
+						g.setColor(Color.green);
+						g.drawPolygon(poly);
+					}
+
+
+
+				}
+
+
 				else if (world.getHex(i, j).getType() == 7)
 				{
 					if(world.getHex(i, j).getName() == 0) {
@@ -136,6 +165,8 @@ public class Grid extends JPanel {
 					g.setColor(Color.yellow);
 					g.drawPolygon(poly);
 				}
+
+
 				else if (world.getHex(i, j).getType() == 8)
 				{
 					if(world.getHex(i, j).getName() == 0) {
@@ -164,6 +195,13 @@ public class Grid extends JPanel {
 					g.setColor(Color.red);
 					g.drawPolygon(poly);
 				}
+
+				else if (world.getHex(i, j).getType() == 20)
+				{
+					// does nothing so no hex is made at certian coords
+
+				}
+
 
 
 				else {

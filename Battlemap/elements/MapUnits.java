@@ -116,11 +116,11 @@ public class MapUnits {
 		{
 			if(pos[3] == 0)
 			{
-				return "Log";
+				return "Bush";
 			}
 			else if(pos[3] == 1)
 			{
-				return null;
+				return "Tree";
 			}
 		}
 
