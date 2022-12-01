@@ -27,7 +27,7 @@ public class Grid extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		Dimension d = new Dimension(world.getSizeX() * 30, world.getSizeY() * 30);
+		Dimension d = new Dimension(world.getSizeX() * 70, world.getSizeY() * 65);
 		return d;
 	}
 
@@ -110,19 +110,31 @@ public class Grid extends JPanel {
 
 
 
-				if (world.getHex(i, j).hasAgent())
+				if (world.getHex(i, j).getType() == 5)
 				{
-					try {
-						bi = ImageIO.read(new File("Battlemap/images/logs.png"));
+					if(world.getHex(i, j).getName() == 0) {
+						try {
+							bi = ImageIO.read(new File("Battlemap/images/logs.png"));
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
 					}
-					catch (IOException e) {
-						throw new RuntimeException(e);
-					}
-
-					g.drawImage(bi,((((int) centres[0])) - 10),(((int) centres[1]) - 10) , 20, 20, null);
+					g.drawImage(bi, ((((int) centres[0])) - 10), (((int) centres[1]) - 10), 20, 20, null);
 					g.setColor(Color.pink);
 					g.drawPolygon(poly);
-
+				}
+				else if (world.getHex(i, j).getType() == 7)
+				{
+					if(world.getHex(i, j).getName() == 0) {
+						try {
+							bi = ImageIO.read(new File("Battlemap/images/chest.png"));
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
+					}
+					g.drawImage(bi, ((((int) centres[0])) - 10), (((int) centres[1]) - 10), 20, 20, null);
+					g.setColor(Color.yellow);
+					g.drawPolygon(poly);
 				}
 				else {
 					g.setColor(Color.black);

@@ -9,19 +9,23 @@ public class World extends Observable
 
 	private int sizeX;
 	private int sizeY;
+	private int type;
+	private int name;
 	HexTile theWorld[][];
 
-	public World(int sizeX, int sizeY)
+	public World(int sizeX, int sizeY, int type, int name)
 	{
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
+		this.type = type;
+		this.name = name;
 		theWorld = new HexTile[sizeX][sizeY];
 
 		for (int x = 0; x < sizeX; x++) 
 		{
 			for (int y = 0; y < sizeY; y++) 
 			{
-				theWorld[x][y] = new HexTile(x, y);
+				theWorld[x][y] = new HexTile(x, y, type, name);
 			}
 		}
 
@@ -53,7 +57,7 @@ public class World extends Observable
 		theWorld[x][y].removeAgent();
 	}
 
-	public boolean placeUnitOnTile(int x, int y)
+	public boolean placeUnitOnTile(int x, int y, int type, int name)
 	{
 		if (x >= sizeX || x < 0)
 		{
@@ -67,7 +71,7 @@ public class World extends Observable
 		{
 			return false;
 		}
-		return theWorld[x][y].addAgent();
+		return theWorld[x][y].addAgent(type, name);
 
 	}
 
@@ -79,5 +83,13 @@ public class World extends Observable
 	public int getSizeY()
 	{
 		return sizeY;
+	}
+	public int getType()
+	{
+		return type;
+	}
+	public int getName()
+	{
+		return name;
 	}
 }

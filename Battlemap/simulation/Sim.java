@@ -1,7 +1,6 @@
 package com.mycompany.gloomhaven.Battlemap.simulation;
 
-import com.mycompany.gloomhaven.Battlemap.elements.Enemies;
-import com.mycompany.gloomhaven.Battlemap.elements.Log;
+import com.mycompany.gloomhaven.Battlemap.elements.MapUnits;
 import com.mycompany.gloomhaven.Battlemap.elements.World;
 import com.mycompany.gloomhaven.Battlemap.events.TickEnd;
 import com.mycompany.gloomhaven.Battlemap.events.TickStart;
@@ -16,48 +15,44 @@ public class Sim extends Observable implements Runnable {
 	private int sizeX = 10;
 	private int sizeY = 7;
 	private int maxTicks = 50;
-	private int numLog = 4;
-	private int numEnemies= 12;
-	ArrayList<Log> allLog;
-	ArrayList<Enemies> allEnemies;
+	private int numUnits = 17;
+	ArrayList<MapUnits> allUnits;
 	World world;
 	Random prng;
 	Grid grid;
 	Integer tick;
 
 	public Sim() {
-		allLog = new ArrayList<Log>(numLog);
-		allEnemies = new ArrayList<Enemies>(numLog);
-		world = new World(sizeX, sizeY);
+		allUnits = new ArrayList<MapUnits>(numUnits);
+
+		world = new World(sizeX, sizeY, 0, 0);
 		populateMap();
 		grid = new Grid(world);
 	}
 
 	public void populateMap() {
-		allLog.add(new Log(0, 1));
-		allLog.add(new Log(0, 2));
-		allLog.add(new Log(4, 5));
-		allLog.add(new Log(4, 6));
-		for (int i = 0; i < numLog; i++)
-		{
-			world.placeUnitOnTile(allLog.get(i).getX(), allLog.get(i).getY());
-		}
-		allEnemies.add(new Enemies(1, 0));
-		allEnemies.add(new Enemies(8, 0));
-		allEnemies.add(new Enemies(1, 1));
-		allEnemies.add(new Enemies(7, 1));
-		allEnemies.add(new Enemies(8, 1));
-		allEnemies.add(new Enemies(1, 4));
-		allEnemies.add(new Enemies(8, 4));
-		allEnemies.add(new Enemies(9, 4));
-		allEnemies.add(new Enemies(0, 5));
-		allEnemies.add(new Enemies(9, 5));
-		allEnemies.add(new Enemies(1, 6));
-		allEnemies.add(new Enemies(8, 6));
+		allUnits.add(new MapUnits(0, 1, 5, 0));
+		allUnits.add(new MapUnits(0, 2, 5, 0));
+		allUnits.add(new MapUnits(4, 5, 5, 0));
+		allUnits.add(new MapUnits(4, 6,5 , 0));
+		allUnits.add(new MapUnits(1, 0,8,0));
+		allUnits.add(new MapUnits(8, 0,8,0));
+		allUnits.add(new MapUnits(1, 1,8,0));
+		allUnits.add(new MapUnits(7, 1,8,0));
+		allUnits.add(new MapUnits(8, 1,8,0));
+		allUnits.add(new MapUnits(1, 4,8,0));
+		allUnits.add(new MapUnits(8, 4,8,0));
+		allUnits.add(new MapUnits(9, 4,8,0));
+		allUnits.add(new MapUnits(0, 5,8,0));
+		allUnits.add(new MapUnits(9, 5,8,0));
+		allUnits.add(new MapUnits(1, 6,8,0));
+		allUnits.add(new MapUnits(8, 6,8,0));
+		allUnits.add(new MapUnits(9, 0,7,0));
 
-		for (int i = 0; i < numEnemies; i++)
+
+		for (int i = 0; i < numUnits; i++)
 		{
-			world.placeUnitOnTile(allEnemies.get(i).getX(), allEnemies.get(i).getY());
+			world.placeUnitOnTile(allUnits.get(i).getX(), allUnits.get(i).getY(), allUnits.get(i).getType(), allUnits.get(i).getName());
 		}
 
 
@@ -76,19 +71,19 @@ public class Sim extends Observable implements Runnable {
 		}
 	}
 
-	public void invokeAgentActions() {
+	public void invokeAgentActions() { // not in use
 		fireEvent(new TickStart());
-		for (int i = 0; i < numLog; i++) {
+		for (int i = 0; i < numUnits; i++) {
 			Random r = new Random();
 			int[] newPos = { -1, -1 };
 			boolean placedSuccessfully = false;
 			while (!placedSuccessfully) {
 				newPos[0] = r.nextInt(world.getSizeX());
 				newPos[1] = r.nextInt(world.getSizeY());
-				placedSuccessfully = world.placeUnitOnTile(newPos[0], newPos[1]);
+				placedSuccessfully = world.placeUnitOnTile(newPos[0], newPos[1], 0, 0);
 			}
-			world.removeUnitFromTile(allLog.get(i).getX(), allLog.get(i).getY());
-			allLog.get(i).setPosition(newPos[0], newPos[1]);
+			world.removeUnitFromTile(allUnits.get(i).getX(), allUnits.get(i).getY());
+			allUnits.get(i).setPosition(newPos[0], newPos[1]);
 			try {
 				Thread.sleep(200); //slow down to see the movement
 			} catch (InterruptedException e) {
