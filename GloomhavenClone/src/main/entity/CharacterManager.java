@@ -44,6 +44,7 @@ public class CharacterManager {
 				
 				setCharacter(selectedCharacter);
 				gh.print(stream, "Selected character " + selectedCharacter.getName() + "!");
+				break;
 			}else {
 				gh.print(stream, "Invalid character selection!");
 			}
@@ -64,6 +65,10 @@ public class CharacterManager {
 	 */
 	public void addCharacter(Character character) {
 		this.characters.put(this.characters.size(), character);
+	}
+	
+	public Character getCharacter() {
+		return this.character;
 	}
 	
 	/**

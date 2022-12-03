@@ -5,6 +5,13 @@ import java.util.Scanner;
 
 import main.entity.CharacterManager;
 import main.entity.EntityManager;
+import main.entity.Player;
+import main.entity.PlayerManager;
+import main.environment.Location;
+import main.environment.WorldManager;
+import main.item.Item;
+import main.shop.Shop;
+import main.shop.ShopItem;
 
 public class GloomhavenClone {
 	
@@ -33,6 +40,8 @@ public class GloomhavenClone {
 		Scanner scanner = new Scanner(System.in);
 		PrintStream stream = System.out;
 		
+		WorldManager worldManager = new WorldManager(stream);
+		
 		EntityManager entityManager = new EntityManager();
 		CharacterManager characterManager = new CharacterManager();
 		
@@ -40,10 +49,24 @@ public class GloomhavenClone {
 		if(!characterManager.hasSelectedCharacter())
 			characterManager.characterSelectionMenu(gloomhavenClone, stream, scanner);
 		
+		Player player = new Player(characterManager.getCharacter(), new Location(worldManager.getWorld(), 3, 3));
+		worldManager.getWorld().addEntity(player);
+		
+		PlayerManager playerManager = new PlayerManager(player);
+		
+		Item sword = new Item("Sword");
+		
+		Shop mainShop = new Shop(new Location(worldManager.getWorld(), 2, 7));
+		mainShop.addShopItem(new ShopItem(sword, 10));
+		worldManager.getWorld().addShop(mainShop);
+		
 		//Game loop will keep looping until running is false
 		while(running) {
+			worldManager.getWorld().printWorld(gloomhavenClone);
 			
-			//TODO game functions
+			playerManager.handleInput(gloomhavenClone, stream, scanner);
+			
+			print(stream, player.getLocation().getX() + " " + player.getLocation().getZ());
 			
 		}
 		
