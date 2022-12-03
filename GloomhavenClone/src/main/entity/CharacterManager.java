@@ -17,7 +17,7 @@ public class CharacterManager {
 		this.characters = new HashMap<>();
 		
 		//Sample character
-		this.addCharacter(new Character("Sample"));
+		this.addCharacter(new Character("Barbarian", 50));
 	}
 	
 	/**

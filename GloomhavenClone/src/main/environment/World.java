@@ -6,8 +6,8 @@ import java.util.List;
 
 import main.GloomhavenClone;
 import main.entity.Entity;
-import main.entity.Player;
-import main.shop.Shop;
+import structure.Shop;
+import structure.Structure;
 
 public class World {
 
@@ -20,7 +20,7 @@ public class World {
 	private int height, width;
 
 	private List<Entity> entities;
-	private List<Shop> shops;
+	private List<Structure> structures;
 
 	public World(String name, PrintStream stream) {
 		this.name = name;
@@ -28,7 +28,7 @@ public class World {
 		height = 5;
 		width = 10;
 		this.entities = new ArrayList<>();
-		this.shops = new ArrayList<>();
+		this.structures = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -42,21 +42,31 @@ public class World {
 	public List<Entity> getEntities() {
 		return this.entities;
 	}
-	
+
 	public void addShop(Shop shop) {
-		this.shops.add(shop);
+		this.structures.add(shop);
 	}
-	
-	public List<Shop> getShops(){
-		return this.shops;
+
+	public List<Structure> getStructures(){
+		return this.structures;
 	}
-	
+
 	public int getHeight() {
 		return height;
 	}
-	
+
 	public int getWidth() {
 		return width;
+	}
+
+	public Structure getStructureFromLocation(int x, int z) {
+		for(Structure structure : structures) {
+			Location loc = structure.getLocation();
+			int xx = loc.getX(), zz = loc.getZ();
+			if(xx == x && zz == z)
+				return structure;
+		}
+		return null;
 	}
 
 	public void printWorld(GloomhavenClone gh) {
@@ -71,31 +81,33 @@ public class World {
 					symbol = w + "," + h;
 				else
 					symbol = "#";
-				
-				for(Shop shop : shops){
 
-					if(shop.getLocation().getX() == h && shop.getLocation().getZ() == w) {
-						symbol = "$";
+				for(Structure structure : structures){
+					if(structure instanceof Shop) {
+						if(structure.getLocation().getX() == h && structure.getLocation().getZ() == w) {
+							symbol = structure.getSymbol();
+						}
 					}
 				}
 
-
 				for(Entity entity : entities){
-
-					if(entity.getLocation().getX() == h && entity.getLocation().getZ() == w) {
-						if(symbol.equals("$"))
+					Location loc = entity.getLocation();
+					int xx = loc.getX(), zz = loc.getZ();
+					if(xx == h && zz == w) {
+						Structure structure = getStructureFromLocation(h, w);
+						if(structure != null)
 							onInteractable = true;
-						symbol = entity.getSymbol();
+						symbol = entity.getSymbol();	
 					}
 				}
 
 				line = line + symbol + " ";
 			}
-			
+
 			gh.print(stream, line);
 		}
 		if(onInteractable)
-			gh.print(stream, "Press 'I' to open the shop!");
+			gh.print(stream, "Press 'I' to interact!");
 	}
 
 }

@@ -9,12 +9,13 @@ import main.environment.World;
 public class Entity implements IEntity {
 	
 	private String symbol;
-	private double health;
+	private double health, maxHealth;
 	private Location location;
 	
 	public Entity(String symbol, Location location) {
 		this.symbol = symbol;
 		this.health = 20;
+		this.maxHealth = 20;
 		this.location = location;
 	}
 	
@@ -38,6 +39,16 @@ public class Entity implements IEntity {
 		this.health = health;
 	}
 
+	@Override
+	public double getMaxHealth() {
+		return this.maxHealth;
+	}
+
+	@Override
+	public void setMaxHealth(double health) {
+		this.maxHealth = health;
+	}
+	
 	@Override
 	public Location getLocation() {
 		return location;

@@ -7,10 +7,14 @@ public class Player extends Entity {
 	private Inventory inventory;
 	private double balance;
 	
-	public Player(Character character, Location location) {
+	private double STARTER_BALANCE = 100;
+	
+	public Player(Character character, Location location, double maxHealth) {
 		super("@", location);
 		this.inventory = new Inventory();
-		this.balance = 0;
+		this.balance = STARTER_BALANCE;
+		setHealth(maxHealth);
+		setMaxHealth(maxHealth);
 	}
 	
 	public Inventory getInventory() {
@@ -18,7 +22,7 @@ public class Player extends Entity {
 	}
 	
 	public boolean canAfford(double amount) {
-		return balance - amount < 0;
+		return !((balance - amount) < 0);
 	}
 	
 	public void addBalance(double amount) {

@@ -13,6 +13,9 @@ public interface IEntity {
 	public double getHealth();
 	public void setHealth(double health);
 	
+	public double getMaxHealth();
+	public void setMaxHealth(double health);
+	
 	public Location getLocation();
 	public void setLocation(Location location);
 	public boolean moveTo(Location location);

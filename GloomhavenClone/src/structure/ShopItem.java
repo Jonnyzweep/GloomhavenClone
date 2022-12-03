@@ -1,4 +1,4 @@
-package main.shop;
+package structure;
 
 import main.item.Item;
 

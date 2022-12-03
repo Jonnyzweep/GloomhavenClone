@@ -1,4 +1,4 @@
-package main.shop;
+package structure;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -10,22 +10,17 @@ import main.entity.Player;
 import main.environment.Location;
 import main.utils.MathUtils;
 
-public class Shop {
+public class Shop extends Structure {
 
 	private List<ShopItem> shopItems;
-	private Location location;
 
 	public Shop(Location location) {
+		super(location, "Weapon Shop", "$", true);
 		this.shopItems = new ArrayList<>();
-		this.location = location;
 	}
 
 	public void addShopItem(ShopItem shopItem) {
 		shopItems.add(shopItem);
-	}
-
-	public Location getLocation() {
-		return this.location;
 	}
 
 	public void openShop(GloomhavenClone gh, PrintStream stream, Scanner scanner, Player player) {
@@ -61,6 +56,8 @@ public class Shop {
 				player.getInventory().addItem(item.getItem());
 				gh.print(stream, "You bought " + item.getItem().getName() + " for " + item.getPrice() + "! Your new balance $" + player.getBalance());
 			
+			}else {
+				gh.print(stream, "You cannot afford this!");
 			}
 
 		}

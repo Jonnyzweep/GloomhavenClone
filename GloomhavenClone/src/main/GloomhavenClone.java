@@ -3,21 +3,22 @@ package main;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import main.entity.Character;
 import main.entity.CharacterManager;
-import main.entity.EntityManager;
 import main.entity.Player;
-import main.entity.PlayerManager;
+import main.entity.PlayerController;
 import main.environment.Location;
 import main.environment.WorldManager;
 import main.item.Item;
-import main.shop.Shop;
-import main.shop.ShopItem;
+import main.item.Material;
+import structure.Shop;
+import structure.ShopItem;
 
 public class GloomhavenClone {
-	
+
 	/** Game run boolean */
 	private boolean running = false;
-	
+
 	/**
 	 * Program starts here when program is ran.
 	 * @param args Program starting arguments
@@ -28,52 +29,58 @@ public class GloomhavenClone {
 		//Call run method to begin game loop
 		instance.run(instance);
 	}
-	
+
 	/**
 	 * Method ran when game starts. Contains main game loop.
 	 */
 	public void run(GloomhavenClone gloomhavenClone) {
-		
+
 		//Set running to true once run method is called
 		this.running = true;
 		//Scanner variable to handle user input
 		Scanner scanner = new Scanner(System.in);
 		PrintStream stream = System.out;
-		
+
 		WorldManager worldManager = new WorldManager(stream);
-		
-		EntityManager entityManager = new EntityManager();
 		CharacterManager characterManager = new CharacterManager();
-		
+
 		//Checks if user has selected a character previously
 		if(!characterManager.hasSelectedCharacter())
 			characterManager.characterSelectionMenu(gloomhavenClone, stream, scanner);
 		
-		Player player = new Player(characterManager.getCharacter(), new Location(worldManager.getWorld(), 3, 3));
+		Character character = characterManager.getCharacter();
+
+		Player player = new Player(characterManager.getCharacter(), new Location(worldManager.getWorld(), 3, 3), character.getMaxHealth());
 		worldManager.getWorld().addEntity(player);
-		
-		PlayerManager playerManager = new PlayerManager(player);
-		
-		Item sword = new Item("Sword");
-		
-		Shop mainShop = new Shop(new Location(worldManager.getWorld(), 2, 7));
-		mainShop.addShopItem(new ShopItem(sword, 10));
-		worldManager.getWorld().addShop(mainShop);
-		
+
+		PlayerController playerController = new PlayerController(player);
+
+		this.setupShops(worldManager);
+
 		//Game loop will keep looping until running is false
 		while(running) {
+			Location location = player.getLocation();
+			print(stream, "");
+			print(stream, "Health: " + player.getHealth() + "/" + player.getMaxHealth() + " [Location | World: " + location.getWorld().getName() + ", X:" + location.getX() + ", Z:" + location.getZ() + "]");
+			print(stream, "Press 'E' to view your inventory");
 			worldManager.getWorld().printWorld(gloomhavenClone);
-			
-			playerManager.handleInput(gloomhavenClone, stream, scanner);
-			
+
+			playerController.handleInput(gloomhavenClone, stream, scanner);
+
 			print(stream, player.getLocation().getX() + " " + player.getLocation().getZ());
-			
+
 		}
-		
+
 		//Once game is not longer running close our scanner
 		scanner.close();
 	}
-	
+
+	public void setupShops(WorldManager worldManager) {
+		Shop weaponShop = new Shop(new Location(worldManager.getWorld(), 2, 7));
+		weaponShop.addShopItem(new ShopItem(new Item("Sword", Material.SWORD), 10));
+		worldManager.getWorld().addShop(weaponShop);
+	}
+
 	public void print(PrintStream stream, String line) {
 		stream.println(line);
 	}
