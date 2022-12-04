@@ -20,7 +20,7 @@ public class Frame extends JFrame
 	public Frame(World world, EventManager event)
 	{
 		super("Hex!");	
-		grid = new Grid(world);
+		//grid = new Grid(world);
 		ui = new UserControls(grid, event);
 		this.add(grid, BorderLayout.CENTER);
 		this.add(ui, BorderLayout.NORTH);

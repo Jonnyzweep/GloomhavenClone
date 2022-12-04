@@ -1,6 +1,6 @@
 package com.mycompany.gloomhaven.Battlemap.gui;
 
-import com.mycompany.gloomhaven.Battlemap.elements.World;
+import com.mycompany.gloomhaven.Battlemap.elements.World2;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 
 public class Grid extends JPanel {
-	World world;
+	World2 world;
 
 
 	private int rectWidth;
@@ -21,7 +21,7 @@ public class Grid extends JPanel {
 
 	private static BufferedImage bi;
 
-	public Grid(World startWorld) {
+	public Grid(World2 startWorld) {
 		this.world = startWorld;
 	}
 
@@ -98,7 +98,7 @@ public class Grid extends JPanel {
 		drawHexGrid(g2d, world, HEXSIZE);
 	}
 
-	private void drawHexGrid(Graphics2D g, World world, int size) {
+	private void drawHexGrid(Graphics2D g, World2 world, int size) {
 
 		for (int i = 0; i < world.getSizeX(); i++) {
 			for (int j = 0; j < world.getSizeY(); j++) {

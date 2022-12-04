@@ -18,16 +18,13 @@ public class Sim extends Observable implements Runnable {
 	private int numUnits = 29;
 	ArrayList<MapUnits> allUnits;
 	World world;
-	Random prng;
-	Grid grid;
-	Integer tick;
 
-	public Sim() {
+	public Sim()
+	{
 		allUnits = new ArrayList<MapUnits>(numUnits);
 
 		world = new World(sizeX, sizeY, 0, 0);
-		populateMap();
-		grid = new Grid(world);
+		populateMap(); // creates map
 	}
 
 	public void populateMap() {
@@ -72,7 +69,7 @@ public class Sim extends Observable implements Runnable {
 
 		for (int i = 0; i < numUnits; i++)
 		{
-			world.placeUnitOnTile(allUnits.get(i).getX(), allUnits.get(i).getY(), allUnits.get(i).getType(), allUnits.get(i).getName());
+			world.placeUnitOnMap(allUnits.get(i).getX(), allUnits.get(i).getY(), allUnits.get(i).getType(), allUnits.get(i).getName());
 		}
 
 
@@ -84,33 +81,14 @@ public class Sim extends Observable implements Runnable {
 
 
 
-	public void run() {
-		for (tick = 0; tick < maxTicks; tick++) {
-			invokeAgentActions();
-			fireEvent(new TickEnd(tick));
-		}
+	public void run() 
+	{
+		world.printBattle();
+		
 	}
 
-	public void invokeAgentActions() { // not in use
-		fireEvent(new TickStart());
-		for (int i = 0; i < numUnits; i++) {
-			Random r = new Random();
-			int[] newPos = { -1, -1 };
-			boolean placedSuccessfully = false;
-			while (!placedSuccessfully) {
-				newPos[0] = r.nextInt(world.getSizeX());
-				newPos[1] = r.nextInt(world.getSizeY());
-				placedSuccessfully = world.placeUnitOnTile(newPos[0], newPos[1], 0, 0);
-			}
-			world.removeUnitFromTile(allUnits.get(i).getX(), allUnits.get(i).getY());
-			allUnits.get(i).setPosition(newPos[0], newPos[1]);
-			try {
-				Thread.sleep(200); //slow down to see the movement
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+
+
 
 	public void fireEvent(Object event) {
 		setChanged();

@@ -1,0 +1,38 @@
+this shows what each number is for the storage method i did. Type is [2] and the name is [3]
+The type is all the map tiles like Doors
+the name is all the possible versions of type given, examples doors can have locked or unlocked
+some types may be empty or missing names because they are not used in this demo build
+format example
+type
+    type name 1
+    type name 2
+
+Real stuff:
+
+0 Empty
+
+1 Doors
+
+2 Corridor
+
+3 Traps
+
+4 Hazardous terrain
+
+5 Difficult terrain
+    0 Log
+
+6 Obstacles
+    0 Bush
+    1 Tree
+
+7 Treasure
+   0 Chest
+
+8 Players
+    0 Harrower Infester
+    1 Forest Imp
+    2 Earth Demon
+
+
+20 is deadspace or nothing
