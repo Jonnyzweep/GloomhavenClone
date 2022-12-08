@@ -42,9 +42,11 @@ public class SimController {
 				System.out.println("Command Table:");
 				System.out.println("Move a unit:        1");
 				System.out.println("Move all units:     2");
-				System.out.println("Map Legend:         3");
-				System.out.println("Exit Battle:        5");
-				System.out.print("Enter Command:      ");
+				System.out.println("Add unit:           3");
+				System.out.println("Remove unit:        4");
+				System.out.println("Map Legend:         5");
+				System.out.println("Exit Battle:        6");
+				System.out.print("Enter Command:        ");
 				choice = sc.nextInt();
 			}
 			else if (choice == 1)
@@ -55,7 +57,34 @@ public class SimController {
 				choice = sc.nextInt();
 
 			}
+			else if (choice == 2)
+			{
+
+				System.out.print("Enter Command: 0 to reshow command table: ");
+				choice = sc.nextInt();
+
+			}
+			else if (choice == 3)
+			{
+				System.out.print("Enter Command: 0 to reshow command table: ");
+				choice = sc.nextInt();
+
+			}
+			else if (choice == 4)
+			{
+				System.out.print("Enter Command: 0 to reshow command table: ");
+				choice = sc.nextInt();
+
+			}
 			else if (choice == 5)
+			{
+				sim.legend();
+
+				System.out.print("Enter Command: 0 to reshow command table: ");
+				choice = sc.nextInt();
+
+			}
+			else if (choice == 6)
 			{
 				whileV = 1;
 				sc.close();
@@ -69,15 +98,11 @@ public class SimController {
 			}
 		}
 		System.out.println("Exiting battlemap");
-
 	}
-
-
 	public static void move1() // moving one unit at a time
 	{
 		Scanner sc = new Scanner(System.in);
 		int oldX, newX, oldY, newY = 0;
-
 		System.out.println("Enter current x coordinate: ");
 		oldX = sc.nextInt();
 		System.out.println("Enter current y coordinate: ");
@@ -91,23 +116,17 @@ public class SimController {
 			if(sim.world.hasUnit(newX -1, newY -1) == false)
 			{
 				sim.world.placeUnitOnMap(newX -1,newY -1,sim.world.getType(oldX -1,oldY -1), sim.world.getName(oldX -1,oldY -1));
-				sim.world.placeUnitOnMap(oldX - 1,oldY - 1,0, 0);
-
+				sim.world.removeUnitFromTile(oldX - 1,oldY - 1);
 			}
 			else
 			{
 				System.out.println("Error: There is a unit on given tile returning back to command table  ");
-
 			}
-
-
-
 		}
 		else
 		{
 			System.out.println("Error: No unit on given tile returning back to command table  ");
 		}
-
 	}
 
 

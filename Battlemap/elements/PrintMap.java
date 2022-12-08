@@ -19,8 +19,7 @@ public class PrintMap
     private int maxY;
     private int counter;
 
-    private String line = "";
-    private int[] position = new int[4];
+
     HexTile theMap[][];
 
     public PrintMap(HexTile map[][], int maxX, int maxY)
@@ -35,21 +34,13 @@ public class PrintMap
         System.out.print(ANSI_CYAN + "Y coordinate are the cyan numbers:" + ANSI_RESET);
         for(int y= 0; y < maxY; y++)
         {
-
-
             reset(y);
-
             for(int x = 0; x < maxX; x++)
             {
                 box(x,y);
             }
-
-
-
-
         }
         System.out.println("");
-
     }
 
     public void reset(int y)
@@ -77,6 +68,7 @@ public class PrintMap
         }
         else if (theMap[x][y].getType() == 1)
         {
+
             insideBox(x,y, 1);
 
         }
@@ -220,4 +212,5 @@ public class PrintMap
         }
 
     }
+
 }

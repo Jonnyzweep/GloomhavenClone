@@ -29,7 +29,7 @@ Real stuff:
 7 Treasure
    0 Chest
 
-8 Players
+8 Enemies
     0 Harrower Infester
     1 Forest Imp
     2 Earth Demon

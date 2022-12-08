@@ -30,6 +30,7 @@ public class HexTile
 	public void removeAgent()
 	{
 		position[2] = 0;
+		position[3] = 0;
 		hasAgent = false;
 	}
 
