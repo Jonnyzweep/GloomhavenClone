@@ -48,7 +48,7 @@ public class SimController {
 				System.out.println("Remove unit:        4");
 				System.out.println("Map Legend:         5");
 				System.out.println("Exit Battle:        6");
-				System.out.print("Enter Command:       ");
+				System.out.print("Enter Command:      ");
 				choice = sc.nextInt();
 			}
 			else if (choice == 1)
@@ -108,7 +108,7 @@ public class SimController {
 		int whileV = 0;
 		while(whileV == 0)
 		{
-			System.out.println("Moveing unit at (" +x+", " + y +"): ");
+
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Enter new x coordinate: ");
 			int newX = sc.nextInt();
@@ -181,6 +181,7 @@ public class SimController {
 		}
 		for( int i =0; i < tracker; i++)
 		{
+			System.out.println("Moving unit at (" +indexX[i]+", " +indexY[i] +"): To skip this unit enter the same coordinates given and press 1");
 			move(indexX[i], indexY[i]);
 		}
 
