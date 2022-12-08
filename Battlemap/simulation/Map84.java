@@ -17,7 +17,6 @@ public class Map84 {
 
 	private int sizeX = 10;
 	private int sizeY = 7;
-	private int maxTicks = 50;
 	private int numUnits = 29;
 	ArrayList<MapUnits> allUnits;
 	World world;
@@ -93,6 +92,11 @@ public class Map84 {
 	{
 		world.printBattle();
 		
+	}
+
+	public int getNumUnits()
+	{
+		return numUnits;
 	}
 
 
