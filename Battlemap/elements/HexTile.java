@@ -36,7 +36,7 @@ public class HexTile
 	
 	public boolean addAgent(int type, int name)
 	{
-		if (this.hasAgent) return false;
+
 		hasAgent = true;
 		position[2] = type;
 		position[3] = name;

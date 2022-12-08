@@ -2,16 +2,12 @@ package com.mycompany.gloomhaven.Battlemap.simulation;
 
 import com.mycompany.gloomhaven.Battlemap.elements.MapUnits;
 import com.mycompany.gloomhaven.Battlemap.elements.World;
-import com.mycompany.gloomhaven.Battlemap.events.TickEnd;
-import com.mycompany.gloomhaven.Battlemap.events.TickStart;
-import com.mycompany.gloomhaven.Battlemap.gui.Grid;
 
 
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Random;
 
-public class Sim extends Observable implements Runnable {
+public class Map84 extends Observable implements Runnable {
 	private int sizeX = 10;
 	private int sizeY = 7;
 	private int maxTicks = 50;
@@ -19,7 +15,7 @@ public class Sim extends Observable implements Runnable {
 	ArrayList<MapUnits> allUnits;
 	World world;
 
-	public Sim()
+	public Map84()
 	{
 		allUnits = new ArrayList<MapUnits>(numUnits);
 
@@ -48,7 +44,7 @@ public class Sim extends Observable implements Runnable {
 
 		allUnits.add(new MapUnits(9, 0,7,0));
 
-		allUnits.add(new MapUnits(1, 0,6,0));
+		allUnits.add(new MapUnits(3, 0,6,0));
 		allUnits.add(new MapUnits(8, 2,6,0));
 		allUnits.add(new MapUnits(5, 1,6,1));
 		allUnits.add(new MapUnits(6, 2,6,1));

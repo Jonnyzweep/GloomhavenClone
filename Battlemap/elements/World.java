@@ -8,6 +8,7 @@ public class World {
 
     HexTile theWorld[][];
     private PrintMap Printer;
+    private boolean hasUnit;
 
     public World(int sizeX, int sizeY,int type, int name)
     {
@@ -48,12 +49,20 @@ public class World {
         {
             return false;
         }
-        if (theWorld[x][y].hasAgent())
-        {
-            return false;
-        }
         return theWorld[x][y].addAgent(type, name);
 
+    }
+    public boolean hasUnit(int x, int y)
+    {
+        if(theWorld[x][y].hasAgent() == true)
+        {
+            hasUnit = true;
+        }
+        else
+        {
+            hasUnit = false;
+        }
+        return hasUnit;
     }
 
     public void printBattle()
@@ -71,13 +80,13 @@ public class World {
     {
         return sizeY;
     }
-    public int getType()
+    public int getType(int x, int y)
     {
-        return type;
+        return theWorld[x][y].getType();
     }
-    public int getName()
+    public int getName(int x, int y)
     {
-        return name;
+        return theWorld[x][y].getName();
     }
 
 
