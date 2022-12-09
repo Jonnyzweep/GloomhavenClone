@@ -19,6 +19,7 @@ Real stuff:
 2 Corridor
 
 3 Traps
+    0 Damage Trap
 
 4 Hazardous terrain
 
@@ -28,6 +29,7 @@ Real stuff:
 6 Obstacles
     0 Bush
     1 Tree
+    2 Table
 
 7 Treasure
    0 Chest
@@ -38,6 +40,10 @@ Real stuff:
     1 Forest Imp
     2 Earth Demon
     3 DarkRider
+    4 Bandit Guard
+    5 Bandit Archer
+    6 Living Bones
+
 
 
 20 is deadspace or Walls, with a black background

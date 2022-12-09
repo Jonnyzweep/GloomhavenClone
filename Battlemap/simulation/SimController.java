@@ -8,6 +8,7 @@ import com.mycompany.gloomhaven.Battlemap.Maps.Map48;
 import java.util.Scanner;
 //Created by Jonny
 //Could add on option to print map scenario infomation and rules for the specific map, but not important now
+//Need to figure out how to work enemy levels
 
 public class SimController {
 

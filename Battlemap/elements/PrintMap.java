@@ -38,7 +38,7 @@ public class PrintMap
             reset(y);
             for(int x = 0; x < maxX; x++)
             {
-                if(theMap[x][y].getType() == 20)
+                if(theMap[x][y].getType() == 20) // printing this outside the box function to avoid the x coord to be added
                 {
                     if(theMap[x][y].getName() == 0)
                     {
@@ -91,7 +91,7 @@ public class PrintMap
         {
             if(y < 9)
             {
-                System.out.print(" " +BLACK_BACKGROUND +"      "+ ANSI_RESET);
+                System.out.print(" " +BLACK_BACKGROUND +"     "+ ANSI_RESET);
             }
             else
             {
@@ -204,7 +204,7 @@ public class PrintMap
         {
             if(theMap[x][y].getName() == 0)
             {
-                System.out.print("[ ] ");
+                System.out.print(ANSI_RED + "(D) " + ANSI_RESET);
             }
 
         }
@@ -234,6 +234,10 @@ public class PrintMap
             {
                 System.out.print(ANSI_GREEN + "(T) " + ANSI_RESET);
             }
+            else if (theMap[x][y].getName() == 2)
+            {
+                System.out.print(ANSI_GREEN + "(t) " + ANSI_RESET);
+            }
             else
             {
                 System.out.print("[ ] "); // if nothings comes up
@@ -245,6 +249,10 @@ public class PrintMap
             if(theMap[x][y].getName() == 0)
             {
                 System.out.print(ANSI_YELLOW + "(C) " + ANSI_RESET);
+            }
+            else if (theMap[x][y].getName() == 1)
+            {
+                System.out.print(ANSI_YELLOW + "(T) " + ANSI_RESET);
             }
             else
             {
@@ -270,6 +278,18 @@ public class PrintMap
             else if (theMap[x][y].getName() == 3)
             {
                 System.out.print(ANSI_RED + "{D} " + ANSI_RESET);
+            }
+            else if (theMap[x][y].getName() == 4)
+            {
+                System.out.print(ANSI_RED + "{G} " + ANSI_RESET);
+            }
+            else if (theMap[x][y].getName() == 5)
+            {
+                System.out.print(ANSI_RED + "{A} " + ANSI_RESET);
+            }
+            else if (theMap[x][y].getName() == 6)
+            {
+                System.out.print(ANSI_RED + "{B} " + ANSI_RESET);
             }
             else
             {

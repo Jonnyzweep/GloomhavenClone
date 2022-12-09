@@ -89,7 +89,7 @@ public class Map48 extends Map
 	public void legend() // simple way to print legend of map, have to update per map files
 	{
 		System.out.println("Legend:");
-		System.out.println(BLACK_BACKGROUND + "  " + ANSI_RESET + " = are walls and deadspace");
+		System.out.println(BLACK_BACKGROUND + "  " + ANSI_RESET + " = are deadspace");
 		System.out.println("[] = Open Space: ! are the starting tiles and acts like normal tiles after adding your characters");
 		System.out.println(ANSI_PURPLE + "() = Difficult terrain:" + ANSI_RESET + " L = Log ");
 		System.out.println(ANSI_GREEN + "() = Obstacles:" + ANSI_RESET + " B = Brush, T = Tree ");
