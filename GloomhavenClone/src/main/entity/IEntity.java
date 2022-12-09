@@ -16,8 +16,14 @@ public interface IEntity {
 	public double getMaxHealth();
 	public void setMaxHealth(double health);
 	
+	public void damage(double damage);
+	public void attack(Entity entity, double damage);
+	
 	public Location getLocation();
 	public void setLocation(Location location);
 	public boolean moveTo(Location location);
+	
+	public boolean isAlive();
+	public void respawn();
 
 }

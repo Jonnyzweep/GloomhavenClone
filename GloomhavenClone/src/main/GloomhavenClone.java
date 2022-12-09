@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import main.entity.Character;
 import main.entity.CharacterManager;
+import main.entity.Enemy;
 import main.entity.Player;
 import main.entity.PlayerController;
 import main.environment.Location;
@@ -18,6 +19,7 @@ public class GloomhavenClone {
 
 	/** Game run boolean */
 	private boolean running = false;
+	private Scanner scanner;
 
 	/**
 	 * Program starts here when program is ran.
@@ -26,6 +28,7 @@ public class GloomhavenClone {
 	public static void main(String args[]) {
 		//Instance of GloomhavenClone class
 		GloomhavenClone instance = new GloomhavenClone();
+		
 		//Call run method to begin game loop
 		instance.run(instance);
 	}
@@ -38,7 +41,7 @@ public class GloomhavenClone {
 		//Set running to true once run method is called
 		this.running = true;
 		//Scanner variable to handle user input
-		Scanner scanner = new Scanner(System.in);
+		scanner = new Scanner(System.in);
 		PrintStream stream = System.out;
 
 		WorldManager worldManager = new WorldManager(stream);
@@ -50,10 +53,13 @@ public class GloomhavenClone {
 		
 		Character character = characterManager.getCharacter();
 
-		Player player = new Player(characterManager.getCharacter(), new Location(worldManager.getWorld(), 3, 3), character.getMaxHealth());
-		worldManager.getWorld().addEntity(player);
+		Player player = new Player(characterManager.getCharacter(), new Location(worldManager.getWorld(), 0, 0), character.getMaxHealth());
+		worldManager.getWorld().registerEntity(player);
 
 		PlayerController playerController = new PlayerController(player);
+		
+		Enemy enemy = new Enemy("E", new Location(worldManager.getWorld(), -3, -3));
+		worldManager.getWorld().registerEntity(enemy);
 
 		this.setupShops(worldManager);
 
@@ -63,7 +69,7 @@ public class GloomhavenClone {
 			print(stream, "");
 			print(stream, "Health: " + player.getHealth() + "/" + player.getMaxHealth() + " [Location | World: " + location.getWorld().getName() + ", X:" + location.getX() + ", Z:" + location.getZ() + "]");
 			print(stream, "Press 'E' to view your inventory");
-			worldManager.getWorld().printWorld(gloomhavenClone);
+			worldManager.getWorld().printWorld(gloomhavenClone, player);
 
 			playerController.handleInput(gloomhavenClone, stream, scanner);
 
@@ -74,9 +80,13 @@ public class GloomhavenClone {
 		//Once game is not longer running close our scanner
 		scanner.close();
 	}
+	
+	public Scanner getScanner() {
+		return this.scanner;
+	}
 
 	public void setupShops(WorldManager worldManager) {
-		Shop weaponShop = new Shop(new Location(worldManager.getWorld(), 2, 7));
+		Shop weaponShop = new Shop(new Location(worldManager.getWorld(), 2, 5));
 		weaponShop.addShopItem(new ShopItem(new Item("Sword", Material.SWORD), 10));
 		worldManager.getWorld().addShop(weaponShop);
 	}

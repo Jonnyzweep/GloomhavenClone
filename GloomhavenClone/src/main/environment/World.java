@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.GloomhavenClone;
+import main.entity.Enemy;
 import main.entity.Entity;
+import main.entity.Player;
 import structure.Shop;
 import structure.Structure;
 
@@ -22,11 +24,11 @@ public class World {
 	private List<Entity> entities;
 	private List<Structure> structures;
 
-	public World(String name, PrintStream stream) {
+	public World(String name, PrintStream stream, int height, int width) {
 		this.name = name;
 		this.stream = stream;
-		height = 5;
-		width = 10;
+		this.height = height;
+		this.width = width;
 		this.entities = new ArrayList<>();
 		this.structures = new ArrayList<>();
 	}
@@ -35,7 +37,7 @@ public class World {
 		return this.name;
 	}
 
-	public void addEntity(Entity entity) {
+	public void registerEntity(Entity entity) {
 		this.entities.add(entity);
 	}
 
@@ -69,16 +71,15 @@ public class World {
 		return null;
 	}
 
-	public void printWorld(GloomhavenClone gh) {
+	public void printWorld(GloomhavenClone gh, Player player) {
 		boolean onInteractable = false;
-		for(int h = 0; h < height; h++) {
-
+		for(int h = height; h >= -height; h--) {
 			String line = "";
 
-			for(int w = 0; w < width; w++) {
+			for(int w = -width; w <= width; w++) {
 				String symbol;
 				if(showCoordinates)
-					symbol = w + "," + h;
+					symbol = " (" + w + "," + h + ")";
 				else
 					symbol = "#";
 
@@ -98,6 +99,15 @@ public class World {
 						if(structure != null)
 							onInteractable = true;
 						symbol = entity.getSymbol();	
+					}
+
+					if(entity.getLocation().equals(player.getLocation())) {
+						if(entity instanceof Enemy) {
+							Enemy enemy = (Enemy) entity;
+							if(enemy.isAlive()) {
+								enemy.battle(gh, stream, gh.getScanner(), player);
+							}
+						}
 					}
 				}
 

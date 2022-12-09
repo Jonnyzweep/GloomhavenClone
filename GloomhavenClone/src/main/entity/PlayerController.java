@@ -24,9 +24,9 @@ public class PlayerController {
 		String input = scanner.nextLine();
 
 		if(input.equalsIgnoreCase(forward)) {
-			player.moveTo(player.getLocation().clone().setX(player.getLocation().getX() - 1));
-		}else if(input.equalsIgnoreCase(backward)){
 			player.moveTo(player.getLocation().clone().setX(player.getLocation().getX() + 1));
+		}else if(input.equalsIgnoreCase(backward)){
+			player.moveTo(player.getLocation().clone().setX(player.getLocation().getX() - 1));
 		}else if(input.equalsIgnoreCase(left)){
 			player.moveTo(player.getLocation().clone().setZ(player.getLocation().getZ() - 1));
 		}else if(input.equalsIgnoreCase(right)){

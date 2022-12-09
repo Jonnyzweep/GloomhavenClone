@@ -10,5 +10,13 @@ public class MathUtils {
 			return false;
 		}
 	}
+	
+	public static int cap(int value, int min, int max) {
+		return value >= max ? max : (value <= min ? min : value);
+	}
+	
+	public static double cap(double value, double min, double max) {
+		return value >= max ? max : (value <= min ? min : value);
+	}
 
 }

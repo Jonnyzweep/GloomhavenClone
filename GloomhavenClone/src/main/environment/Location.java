@@ -40,5 +40,13 @@ public class Location {
 	public Location clone() {
 		return new Location(world, x, z);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Location loc = (Location) obj;
+		if(loc.getX() == x && loc.getZ() == z && loc.getWorld().equals(world))
+			return true;
+		return false;
+	}
 
 }

@@ -2,13 +2,14 @@ package main.entity;
 
 import main.environment.Location;
 import main.environment.World;
+import main.utils.MathUtils;
 
 /*
  * Base Entity object class
  */
 public class Entity implements IEntity {
 	
-	private String symbol;
+	protected String symbol;
 	private double health, maxHealth;
 	private Location location;
 	
@@ -50,6 +51,18 @@ public class Entity implements IEntity {
 	}
 	
 	@Override
+	public void damage(double damage) {
+		double health = getHealth() - damage;
+		health = MathUtils.cap(health, 0, getMaxHealth());
+		setHealth(health);
+	}
+
+	@Override
+	public void attack(Entity entity, double damage) {
+		entity.damage(damage);
+	}
+	
+	@Override
 	public Location getLocation() {
 		return location;
 	}
@@ -63,12 +76,24 @@ public class Entity implements IEntity {
 	public boolean moveTo(Location location) {
 		World world = location.getWorld();
 		int xBound = world.getHeight(), zBound = world.getWidth();
-		if(location.getX() > xBound - 1 || location.getX() < 0 || location.getZ() > zBound - 1 || location.getZ() < 0)
+		if(location.getX() > xBound || location.getX() < -xBound || location.getZ() > zBound || location.getZ() < -zBound)
 			return false;
 		else {
 			this.location = location;
 			return true;
 		}
+	}
+
+	@Override
+	public boolean isAlive() {
+		return health > 0;
+	}
+
+	@Override
+	public void respawn() {
+		this.health = this.maxHealth;
+		
+		setLocation(new Location(location.getWorld(), 0, 0));
 	}
 	
 	
