@@ -30,14 +30,32 @@ public class PrintMap
         this.theMap = map;
 
         System.out.println("Battle Map 84:");
-        System.out.print("X coordinate are the white numbers and ");
-        System.out.print(ANSI_CYAN + "Y coordinate are the cyan numbers:" + ANSI_RESET);
+        System.out.print("Y coordinate are the white numbers and ");
+        System.out.print(ANSI_CYAN + "X coordinate are the cyan numbers:" + ANSI_RESET);
         for(int y= 0; y < maxY; y++)
         {
             reset(y);
             for(int x = 0; x < maxX; x++)
             {
-                box(x,y);
+                if(theMap[x][y].getType() == 20)
+                {
+                        System.out.print("    "); // deadspace, no map spaces
+                }
+                else
+                {
+                    if(x < 9)
+                    {
+                        //the extra space V there is to account big maps with double digits
+                        System.out.print(" "+ANSI_CYAN + (x+1) + ANSI_RESET); // add x beside each bracket because the offset brackets could be hard the track
+                        box(x, y);
+                    }
+                    else
+                    {
+                        System.out.print(ANSI_CYAN + (x+1) + ANSI_RESET); // add x beside each bracket because the offset brackets could be hard the track
+                        box(x, y);
+                    }
+
+                }
             }
         }
         System.out.println("");
@@ -46,7 +64,7 @@ public class PrintMap
     public void reset(int y)
     {
         System.out.println("");
-        System.out.print(ANSI_CYAN + (y + 1) + ANSI_RESET); // showing y cord
+        System.out.print(y + 1); // showing y cord
 
         if(counter == 0)
         {
@@ -64,7 +82,7 @@ public class PrintMap
     {
         if(theMap[x][y].getType() == 0)
         {
-            System.out.print((x+1) +"[ ] ");
+            System.out.print("[ ] ");
         }
         else if (theMap[x][y].getType() == 1)
         {
@@ -112,28 +130,23 @@ public class PrintMap
             System.out.print(ANSI_RED + "[" + theMap[x][y].getName() +"] " + ANSI_RESET);
 
         }
-        else if (theMap[x][y].getType() == 20)
-        {
-            System.out.print("    "); // deadspace
 
-        }
     }
 
     public void insideBox(int x, int y, int t)
     {
-        int curX = x +1;
         if(t == 1)
         {
             if(theMap[x][y].getName() == 0)
             {
-                System.out.print(curX+"[ ] ");
+                System.out.print("[ ] ");
             }
         }
         else if (t == 2)
         {
             if(theMap[x][y].getName() == 0)
             {
-                System.out.print(curX+"[ ] ");
+                System.out.print("[ ] ");
             }
 
         }
@@ -141,7 +154,7 @@ public class PrintMap
         {
             if(theMap[x][y].getName() == 0)
             {
-                System.out.print(curX+"[ ] ");
+                System.out.print("[ ] ");
             }
 
         }
@@ -149,13 +162,12 @@ public class PrintMap
         {
             if(theMap[x][y].getName() == 0)
             {
-                System.out.print(curX+"[ ] ");
+                System.out.print("[ ] ");
             }
 
         }
         else if (t == 5)
         {
-            System.out.print(curX);
             if(theMap[x][y].getName() == 0)
             {
                 System.out.print(ANSI_PURPLE + "[L] " + ANSI_RESET);
@@ -164,7 +176,6 @@ public class PrintMap
         }
         else if (t == 6)
         {
-            System.out.print(curX);
             if(theMap[x][y].getName() == 0)
             {
                 System.out.print(ANSI_GREEN + "[B] " + ANSI_RESET);
@@ -181,7 +192,6 @@ public class PrintMap
         }
         else if (t == 7)
         {
-            System.out.print(curX);
             if(theMap[x][y].getName() == 0)
             {
                 System.out.print(ANSI_YELLOW + "[C] " + ANSI_RESET);
@@ -194,7 +204,6 @@ public class PrintMap
         }
         else if (t == 8)
         {
-            System.out.print(curX);
             if(theMap[x][y].getName() == 0)
             {
                 System.out.print(ANSI_BLACK + "[H] " + ANSI_RESET);
