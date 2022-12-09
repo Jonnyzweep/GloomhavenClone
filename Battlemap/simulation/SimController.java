@@ -3,10 +3,11 @@ package com.mycompany.gloomhaven.Battlemap.simulation;
 
 import com.mycompany.gloomhaven.Battlemap.Maps.Map;
 import com.mycompany.gloomhaven.Battlemap.Maps.Map1;
-import com.mycompany.gloomhaven.Battlemap.Maps.Map84;
+import com.mycompany.gloomhaven.Battlemap.Maps.Map48;
 
 import java.util.Scanner;
-
+//Created by Jonny
+//Could add on option to print map scenario infomation and rules for the specific map, but not important now
 
 public class SimController {
 
@@ -18,7 +19,7 @@ public class SimController {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Maps currently made are: 1, 84.");
+		System.out.println("Maps currently made are: 1, 48.");
 		System.out.print("Enter Map number to load:  ");
 		int map = sc.nextInt();
 
@@ -27,9 +28,9 @@ public class SimController {
 		{
 			sim = new Map1();
 		}
-		else if(map == 84)
+		else if(map == 48)
 		{
-			sim = new Map84();
+			sim = new Map48();
 		}
 
 
@@ -231,16 +232,28 @@ public class SimController {
 			int newX = sc.nextInt();
 			System.out.print("Y = ");
 			int newY = sc.nextInt();
-			if(sim.hasUnit(newX -1, newY -1) == false)
+			if(sim.getType(newX -1, newY -1) == 0)
 			{
-				players +=1; // adding one so it will start the first player as 1 on the map
-				sim.placeUnitOnMap(newX - 1, newY -1, 9, players);
-				whileV = 4;
+				if(sim.getName(newX-1,newY-1) == 1)
+				{
+					players +=1; // adding one so it will start the first player as 1 on the map
+					sim.placeUnitOnMap(newX - 1, newY -1, 9, players);
+					whileV = 4;
+
+				}
+				else
+				{
+					System.out.print("Error: Not a Starting tile, [!]; to return to command table press 1:  to give new coordinates press any other number: ");
+					int c = sc.nextInt();
+					if (c == 1) {
+						whileV = 3;
+					}
+				}
 
 			}
 			else
 			{
-				System.out.print("Error: There is a unit on given tile; to return to command table press 1:  to give new coordinates press any other number: ");
+				System.out.print("Error: Not a Starting tile; to return to command table press 1:  to give new coordinates press any other number: ");
 				int c = sc.nextInt();
 				if (c == 1) {
 					whileV = 3;

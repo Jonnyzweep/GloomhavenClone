@@ -119,7 +119,8 @@ public class PrintMap
     {
         if(theMap[x][y].getType() == 0)
         {
-            System.out.print("[ ] ");
+            insideBox(x,y, 0);
+
         }
         else if (theMap[x][y].getType() == 1)
         {
@@ -172,7 +173,19 @@ public class PrintMap
 
     public void insideBox(int x, int y, int t)
     {
-        if(t == 1)
+        if(t==0)
+        {
+            if(theMap[x][y].getName() == 0)
+            {
+                System.out.print("[ ] ");
+            }
+            else if (theMap[x][y].getName() == 1)
+            {
+                System.out.print("[!] ");
+            }
+
+        }
+        else if(t == 1)
         {
             if(theMap[x][y].getName() == 0)
             {
@@ -253,6 +266,10 @@ public class PrintMap
             else if (theMap[x][y].getName() == 2)
             {
                 System.out.print(ANSI_RED + "{E} " + ANSI_RESET);
+            }
+            else if (theMap[x][y].getName() == 3)
+            {
+                System.out.print(ANSI_RED + "{D} " + ANSI_RESET);
             }
             else
             {

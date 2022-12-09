@@ -5,7 +5,7 @@ import com.mycompany.gloomhaven.Battlemap.elements.World;
 
 import java.util.ArrayList;
 
-public class Map 
+public class Map //Parent of the battlemap.
 {
 
     public World world;
