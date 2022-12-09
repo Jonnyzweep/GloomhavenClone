@@ -1,28 +1,32 @@
-package com.mycompany.gloomhaven.Battlemap.simulation;
+package com.mycompany.gloomhaven.Battlemap.Maps;
 
 import com.mycompany.gloomhaven.Battlemap.elements.MapUnits;
 import com.mycompany.gloomhaven.Battlemap.elements.World;
 
 
 import java.util.ArrayList;
-public class Map84 {
+public class Map84 extends Map
+{
+	private int sizeX= 10;
+	private int sizeY = 7;
+	private int numUnits;
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
 	public static final String ANSI_GREEN = "\u001B[32m";
 	public static final String ANSI_YELLOW = "\u001B[33m";
 	public static final String ANSI_PURPLE = "\u001B[35m";
+	public static final String BLACK_BACKGROUND = "\033[40m";  // Walls
 
 
 
-	private int sizeX = 10;
-	private int sizeY = 7;
-	private int numUnits = 29;
+
 	ArrayList<MapUnits> allUnits;
-	World world;
+	public World world;
 
 	public Map84()
 	{
+
 		allUnits = new ArrayList<MapUnits>(numUnits);
 
 		world = new World(sizeX, sizeY, 0, 0);
@@ -64,9 +68,12 @@ public class Map84 {
 		allUnits.add(new MapUnits(9, 3,20,0));
 		allUnits.add(new MapUnits(9, 5,20,0));
 
+		numUnits = allUnits.size();
+
+
 		for (int i = 0; i < numUnits; i++)
 		{
-			world.placeUnitOnMap(allUnits.get(i).getX(), allUnits.get(i).getY(), allUnits.get(i).getType(), allUnits.get(i).getName());
+			this.world.placeUnitOnMap(allUnits.get(i).getX(), allUnits.get(i).getY(), allUnits.get(i).getType(), allUnits.get(i).getName());
 		}
 
 	}
@@ -74,39 +81,49 @@ public class Map84 {
 	public void legend() // simple way to print legend of map, have to update per map files
 	{
 		System.out.println("Legend:");
-		System.out.println(ANSI_PURPLE + "Difficult terrain:" + ANSI_RESET + " L = Log ");
-		System.out.println(ANSI_GREEN + "Obstacles:" + ANSI_RESET + " B = Brush, T = Tree ");
-		System.out.println(ANSI_YELLOW + "Treasure:" + ANSI_RESET + " C = Chest ");
-		System.out.println(ANSI_BLACK + "Enemies:" + ANSI_RESET + " H = Harrower Infester, F = Forest Imp, E = Earth Demon ");
-		System.out.println(ANSI_RED + "Players:" + ANSI_RESET + " When added ");
+		System.out.println(BLACK_BACKGROUND + "  " + ANSI_RESET + " = are walls and deadspace");
+		System.out.println(ANSI_PURPLE + "() = Difficult terrain:" + ANSI_RESET + " L = Log ");
+		System.out.println(ANSI_GREEN + "() = Obstacles:" + ANSI_RESET + " B = Brush, T = Tree ");
+		System.out.println(ANSI_YELLOW + "() = Treasure:" + ANSI_RESET + " C = Chest ");
+		System.out.println(ANSI_RED + "{} = Enemies:" + ANSI_RESET + " H = Harrower Infester, F = Forest Imp, E = Earth Demon ");
+		System.out.println(ANSI_RED + "<> = Players:" + ANSI_RESET + " When added ");
 
 
 
 	}
-
-
-
-
-
-	public void run() 
+	public void printMap()
 	{
 		world.printBattle();
-		
+
 	}
+	public int getType(int x, int y)
+	{
+		return world.getType(x,y);
+	}
+	public int getName(int x, int y)
+	{
+		return world.getName(x,y);
+	}
+	public void placeUnitOnMap(int x, int y, int type, int name)
+	{
+		world.placeUnitOnMap(x,y,type,name);
+
+	}
+	public void removeUnitFromTile(int x, int y)
+	{
+		world.removeUnitFromTile(x,y);
+	}
+	public boolean hasUnit(int x, int y)
+	{
+		return world.hasUnit(x,y);
+	}
+
+
 
 	public int getNumUnits()
 	{
 		return numUnits;
 	}
-
-
-
-
-
-	public World getWorld() {
-		return world;
-	}
-
 
 
 }

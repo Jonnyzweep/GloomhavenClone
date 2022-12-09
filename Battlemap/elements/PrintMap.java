@@ -13,6 +13,7 @@ public class PrintMap
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String BLACK_BACKGROUND = "\033[40m";  // Walls
 
 
     private int maxX;
@@ -39,19 +40,39 @@ public class PrintMap
             {
                 if(theMap[x][y].getType() == 20)
                 {
-                        System.out.print("    "); // deadspace, no map spaces
+                    if(theMap[x][y].getName() == 0)
+                    {
+                        System.out.print(BLACK_BACKGROUND +"       " + ANSI_RESET); // deadspace, no map spaces
+                    }
+                    else if (theMap[x][y].getName() == 1)
+                    {
+                        System.out.print(BLACK_BACKGROUND +"    |  "+ ANSI_RESET); // wall
+                    }
+                    else if (theMap[x][y].getName() == 2)
+                    {
+                        System.out.print(BLACK_BACKGROUND +"-------"+ ANSI_RESET); // wall
+                    }
+                    else if (theMap[x][y].getName() == 3)
+                    {
+                        System.out.print(BLACK_BACKGROUND +"----|  "+ ANSI_RESET); // corner
+                    }
+                    else if (theMap[x][y].getName() == 4)
+                    {
+                        System.out.print(BLACK_BACKGROUND +"    |--"+ ANSI_RESET); // corner
+                    }
+
                 }
                 else
                 {
                     if(x < 9)
                     {
                         //the extra space V there is to account big maps with double digits
-                        System.out.print(" "+ANSI_CYAN + (x+1) + ANSI_RESET); // add x beside each bracket because the offset brackets could be hard the track
+                        System.out.print("  "+ANSI_CYAN + (x+1) + ANSI_RESET); // add x beside each bracket because the offset brackets could be hard the track
                         box(x, y);
                     }
                     else
                     {
-                        System.out.print(ANSI_CYAN + (x+1) + ANSI_RESET); // add x beside each bracket because the offset brackets could be hard the track
+                        System.out.print(" "+ANSI_CYAN + (x+1) + ANSI_RESET); // add x beside each bracket because the offset brackets could be hard the track
                         box(x, y);
                     }
 
@@ -68,12 +89,28 @@ public class PrintMap
 
         if(counter == 0)
         {
-            System.out.print("     ");
-            counter =1;
+            if(y < 9)
+            {
+                System.out.print(" " +BLACK_BACKGROUND +"      "+ ANSI_RESET);
+            }
+            else
+            {
+                System.out.print(BLACK_BACKGROUND +"     "+ ANSI_RESET);
+
+            }
+            counter = 1;
         }
         else
         {
-            System.out.print("   ");
+            if(y < 9) // to account for double digit extra space
+            {
+                System.out.print(" " +BLACK_BACKGROUND +"  "+ ANSI_RESET);
+            }
+            else
+            {
+                System.out.print(BLACK_BACKGROUND +"  "+ ANSI_RESET);
+            }
+
          counter = 0;
         }
     }
@@ -127,7 +164,7 @@ public class PrintMap
         }
         else if (theMap[x][y].getType() == 9)
         {
-            System.out.print(ANSI_RED + "[" + theMap[x][y].getName() +"] " + ANSI_RESET);
+            System.out.print(ANSI_RED + "<" + theMap[x][y].getName() +"> " + ANSI_RESET); // only need number, so i dont have to convert name number to a letter
 
         }
 
@@ -139,7 +176,7 @@ public class PrintMap
         {
             if(theMap[x][y].getName() == 0)
             {
-                System.out.print("[ ] ");
+                System.out.print(ANSI_BLUE + "[D] " + ANSI_RESET);
             }
         }
         else if (t == 2)
@@ -170,7 +207,7 @@ public class PrintMap
         {
             if(theMap[x][y].getName() == 0)
             {
-                System.out.print(ANSI_PURPLE + "[L] " + ANSI_RESET);
+                System.out.print(ANSI_PURPLE + "(L) " + ANSI_RESET);
             }
 
         }
@@ -178,11 +215,11 @@ public class PrintMap
         {
             if(theMap[x][y].getName() == 0)
             {
-                System.out.print(ANSI_GREEN + "[B] " + ANSI_RESET);
+                System.out.print(ANSI_GREEN + "(B) " + ANSI_RESET);
             }
             else if (theMap[x][y].getName() == 1)
             {
-                System.out.print(ANSI_GREEN + "[T] " + ANSI_RESET);
+                System.out.print(ANSI_GREEN + "(T) " + ANSI_RESET);
             }
             else
             {
@@ -194,7 +231,7 @@ public class PrintMap
         {
             if(theMap[x][y].getName() == 0)
             {
-                System.out.print(ANSI_YELLOW + "[C] " + ANSI_RESET);
+                System.out.print(ANSI_YELLOW + "(C) " + ANSI_RESET);
             }
             else
             {
@@ -206,16 +243,16 @@ public class PrintMap
         {
             if(theMap[x][y].getName() == 0)
             {
-                System.out.print(ANSI_BLACK + "[H] " + ANSI_RESET);
+                System.out.print(ANSI_RED+ "{H} " + ANSI_RESET);
             }
 
             else if (theMap[x][y].getName() == 1)
             {
-                System.out.print(ANSI_BLACK + "[F] " + ANSI_RESET);
+                System.out.print(ANSI_RED + "{F} " + ANSI_RESET);
             }
             else if (theMap[x][y].getName() == 2)
             {
-                System.out.print(ANSI_BLACK + "[E] " + ANSI_RESET);
+                System.out.print(ANSI_RED + "{E} " + ANSI_RESET);
             }
             else
             {
