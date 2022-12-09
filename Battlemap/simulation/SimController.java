@@ -116,6 +116,7 @@ public class SimController {
 			else if (choice == 6)
 			{
 				//run battle sim
+				System.out.println("Not made yet");
 				System.out.print("Enter Command: 0 to reshow command table: ");
 				choice = sc.nextInt();
 

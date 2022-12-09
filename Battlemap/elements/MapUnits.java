@@ -1,5 +1,5 @@
 package com.mycompany.gloomhaven.Battlemap.elements;
-
+//Could be used when using simulation
 public class MapUnits {
 	private int pos[] = new int[4];
 
@@ -153,8 +153,24 @@ public class MapUnits {
 			}
 			else if(pos[3] == 3)
 			{
+				return "Dark Rider";
+			}
+			else if(pos[3] == 5)
+			{
+				return "Bandit Guard";
+			}
+			else if(pos[3] == 6)
+			{
+				return "Bandit Archer";
+			}
+			else if(pos[3] ==7)
+			{
+				return "Living Bones";
+			}else
+			{
 				return null;
 			}
+
 		}
 
 		return null;
