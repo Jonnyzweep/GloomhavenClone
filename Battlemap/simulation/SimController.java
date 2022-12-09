@@ -10,6 +10,7 @@ public class SimController {
 
 	public static void main(String[] args)
 	{
+
 		Scanner sc = new Scanner(System.in);
 
 		//System.out.println("Maps currently made are 84.");
@@ -25,11 +26,11 @@ public class SimController {
 
 		run();
 
-
 	}
 
 	public static void run()
 	{
+		int players = 0;
 		Scanner sc = new Scanner(System.in);
 		int whileV = 0;
 		int choice = 0;
@@ -69,6 +70,8 @@ public class SimController {
 			}
 			else if (choice == 3)
 			{
+				players = addPlayer(players);
+				sim.world.printBattle();
 				System.out.print("Enter Command: 0 to reshow command table: ");
 				choice = sc.nextInt();
 
@@ -110,9 +113,9 @@ public class SimController {
 		{
 
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Enter new x coordinate: ");
+			System.out.print("Enter new x coordinate: ");
 			int newX = sc.nextInt();
-			System.out.println("Enter new y coordinate: ");
+			System.out.print("Enter new y coordinate: ");
 			int newY = sc.nextInt();
 			if(sim.world.hasUnit(newX -1, newY -1) == false)
 			{
@@ -122,7 +125,7 @@ public class SimController {
 			}
 			else
 			{
-				System.out.println("Error: No unit on given tile; to skip this unit press 1:  to give new coordinates press any other number: ");
+				System.out.print("Error: There is a unit on given tile; to skip this unit press 1:  to give new coordinates press any other number: ");
 				int c = sc.nextInt();
 				if(c == 1)
 				{
@@ -139,9 +142,9 @@ public class SimController {
 		while(whileV == 0)
 		{
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Enter current x coordinate: ");
+			System.out.print("Enter current x coordinate: ");
 			int oldX = sc.nextInt();
-			System.out.println("Enter current y coordinate: ");
+			System.out.print("Enter current y coordinate: ");
 			int oldY = sc.nextInt();
 			if(sim.world.hasUnit(oldX - 1, oldY -1) == true) // all the minus 1 are for because all arrays start at 0
 			{
@@ -150,7 +153,7 @@ public class SimController {
 			}
 			else
 			{
-				System.out.println("Error: No unit on given tile; to return to command table press 1:  to give new coordinates press any other number: ");
+				System.out.print("Error: No unit on given tile; to return to command table press 1:  to give new coordinates press any other number: ");
 				int c = sc.nextInt();
 				if(c == 1)
 				{
@@ -184,6 +187,43 @@ public class SimController {
 			System.out.println("Moving unit at (" +indexX[i]+", " +indexY[i] +"): To skip this unit enter the same coordinates given and press 1");
 			move(indexX[i], indexY[i]);
 		}
+
+	}
+
+	public static int addPlayer(int players)
+	{
+
+		int whileV = 0;
+		while(whileV == 0)
+		{
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Enter the coordinates where you want new player to be :");
+			System.out.print("X = ");
+			int newX = sc.nextInt();
+			System.out.print("Y = ");
+			int newY = sc.nextInt();
+			if(sim.world.hasUnit(newX -1, newY -1) == false)
+			{
+				players +=1; // adding one so it will start the first player as 1 on the map
+				sim.world.placeUnitOnMap(newX - 1, newY -1, 9, players);
+				whileV = 4;
+
+			}
+			else
+			{
+				System.out.print("Error: No unit on given tile; to return to command table press 1:  to give new coordinates press any other number: ");
+				int c = sc.nextInt();
+				if (c == 1) {
+					whileV = 3;
+				}
+			}
+
+
+
+		}
+
+		return players;
+
 
 	}
 

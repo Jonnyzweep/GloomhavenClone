@@ -107,6 +107,11 @@ public class PrintMap
             insideBox(x,y, 8);
 
         }
+        else if (theMap[x][y].getType() == 9)
+        {
+            System.out.print(ANSI_RED + "[" + theMap[x][y].getName() +"] " + ANSI_RESET);
+
+        }
         else if (theMap[x][y].getType() == 20)
         {
             System.out.print("    "); // deadspace
