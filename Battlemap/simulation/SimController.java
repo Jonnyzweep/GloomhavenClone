@@ -48,7 +48,8 @@ public class SimController {
 				System.out.println("Add User unit:      3");
 				System.out.println("Remove unit:        4");
 				System.out.println("Map Legend:         5");
-				System.out.println("Exit Battle:        6");
+				System.out.println("Battle sim:         6");
+				System.out.println("Exit Battle:        7");
 				System.out.print("Enter Command:      ");
 				choice = sc.nextInt();
 			}
@@ -78,6 +79,8 @@ public class SimController {
 			}
 			else if (choice == 4)
 			{
+				removeUnit();
+				sim.world.printBattle();
 				System.out.print("Enter Command: 0 to reshow command table: ");
 				choice = sc.nextInt();
 
@@ -91,6 +94,14 @@ public class SimController {
 
 			}
 			else if (choice == 6)
+			{
+				//run battle sim
+				System.out.print("Enter Command: 0 to reshow command table: ");
+				choice = sc.nextInt();
+
+
+			}
+			else if (choice == 7)
 			{
 				whileV = 1;
 				sc.close();
@@ -211,19 +222,43 @@ public class SimController {
 			}
 			else
 			{
+				System.out.print("Error: There is a unit on given tile; to return to command table press 1:  to give new coordinates press any other number: ");
+				int c = sc.nextInt();
+				if (c == 1) {
+					whileV = 3;
+				}
+			}
+		}
+		return players;
+	}
+
+	public static void removeUnit()
+	{
+		int whileV = 0;
+		while(whileV == 0)
+		{
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Enter the coordinates of the unit you want to remove:");
+			System.out.print("X = ");
+			int newX = sc.nextInt();
+			System.out.print("Y = ");
+			int newY = sc.nextInt();
+			if(sim.world.hasUnit(newX -1, newY -1) == true)
+			{
+				 // adding one so it will start the first player as 1 on the map
+				sim.world.removeUnitFromTile(newX - 1, newY -1);
+				whileV = 4;
+
+			}
+			else
+			{
 				System.out.print("Error: No unit on given tile; to return to command table press 1:  to give new coordinates press any other number: ");
 				int c = sc.nextInt();
 				if (c == 1) {
 					whileV = 3;
 				}
 			}
-
-
-
 		}
-
-		return players;
-
 
 	}
 
