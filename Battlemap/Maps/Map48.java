@@ -133,6 +133,10 @@ public class Map48 extends Map
 	{
 		return numUnits;
 	}
+	public int getNumberOfEnemies()
+	{
+		return MapUnits.getNames();
+	}
 
 
 }

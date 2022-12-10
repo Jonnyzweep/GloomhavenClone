@@ -10,21 +10,22 @@ public class Map //Parent of the battlemap.
 
     public World world;
 
+
     public Map()
     {
         world = new World(0, 0, 0, 0);
     }
     public int getNumUnits()
     {
-        return 0;
+        return -1;
     }
     public int getType(int x, int y)
     {
-        return 0;
+        return -1;
     }
     public int getName(int x, int y)
     {
-        return 0;
+        return -1;
     }
     public void placeUnitOnMap(int x, int y, int type, int name)
     {
@@ -51,4 +52,16 @@ public class Map //Parent of the battlemap.
     }
 
 
+    public int getSizeY()
+    {
+        return -1;
+    }
+    public int getSizeX() {
+        return -1;
+    }
+
+    public int getNumberOfEnemies()
+    {
+        return -1;
+    }
 }

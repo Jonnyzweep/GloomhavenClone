@@ -3,11 +3,15 @@ package com.mycompany.gloomhaven.Battlemap.elements;
 public class MapUnits {
 	private int pos[] = new int[4];
 
+
+	private static int names = 7; // for add enemy
+
 	public MapUnits(int setPosX, int setPosY, int setType, int setName) {
 		pos[0] = setPosX;
 		pos[1] = setPosY;
 		pos[2] = setType;
 		pos[3] = setName;
+
 	}
 
 	public void setPosition(int newPosX, int newPosY) {
@@ -28,6 +32,10 @@ public class MapUnits {
 	public int getName() {
 		return pos[3];
 	}
+	public static int getNames() {
+		return names;
+	}
+
 
 	public String geteType() // no need yet to get name
 	{

@@ -197,6 +197,14 @@ public class Map1 extends Map
     {
         return world.hasUnit(x,y);
     }
+    public int getSizeX()
+    {
+        return sizeX;
+    }
+    public int getSizeY()
+    {
+        return sizeY;
+    }
 
 
 
@@ -204,4 +212,9 @@ public class Map1 extends Map
     {
         return numUnits;
     }
+    public int getNumberOfEnemies()
+    {
+        return MapUnits.getNames();
+    }
+
 }
