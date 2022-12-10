@@ -30,7 +30,7 @@ public class PrintMap
         this.maxY = maxY;
         this.theMap = map;
 
-        System.out.println("Battle Map 84:");
+        System.out.println("");
         System.out.print("Y coordinate are the white numbers and ");
         System.out.print(ANSI_CYAN + "X coordinate are the cyan numbers:" + ANSI_RESET);
         for(int y= 0; y < maxY; y++)
