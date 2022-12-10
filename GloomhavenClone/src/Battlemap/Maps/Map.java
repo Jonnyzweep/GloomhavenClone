@@ -1,19 +1,16 @@
-package com.mycompany.gloomhaven.Battlemap.Maps;
+package com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.Maps;
 
-import com.mycompany.gloomhaven.Battlemap.elements.MapUnits;
-import com.mycompany.gloomhaven.Battlemap.elements.World;
-
-import java.util.ArrayList;
+import com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.elements.BattleWorld;
 
 public class Map //Parent of the battlemap.
 {
 
-    public World world;
+    public BattleWorld battleWorld;
 
 
     public Map()
     {
-        world = new World(0, 0, 0, 0);
+        battleWorld = new BattleWorld(0, 0, 0, 0);
     }
     public int getNumUnits()
     {

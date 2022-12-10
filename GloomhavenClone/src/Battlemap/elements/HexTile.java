@@ -1,4 +1,4 @@
-package com.mycompany.gloomhaven.Battlemap.elements;
+package com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.elements;
 
 public class HexTile 
 {

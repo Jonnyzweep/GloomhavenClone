@@ -1,6 +1,4 @@
-package com.mycompany.gloomhaven.Battlemap.elements;
-
-import com.mycompany.gloomhaven.Battlemap.elements.HexTile;
+package com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.elements;
 
 public class PrintMap
 {

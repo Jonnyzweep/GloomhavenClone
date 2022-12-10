@@ -1,10 +1,9 @@
-package com.mycompany.gloomhaven.Battlemap.simulation;
+package com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.simulation;
 
 
-import com.mycompany.gloomhaven.Battlemap.Maps.Map;
-import com.mycompany.gloomhaven.Battlemap.Maps.Map1;
-import com.mycompany.gloomhaven.Battlemap.Maps.Map48;
-import com.mycompany.gloomhaven.Battlemap.elements.MapUnits;
+import com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.Maps.Map;
+import com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.Maps.Map1;
+import com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.Maps.Map48;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -66,8 +65,19 @@ public class SimController {
 		run();
 
 	}
+	public static void runChoice(int map)// trying to implement it to main driver
+	{
+		if(map == 1)
+		{
+			sim = new Map1();
+		}
+		System.out.println("Loaded Map " + map + ":");
 
-	public static void run()
+	}
+
+
+
+	public static int run()
 	{
 		int players = 0;
 		Scanner sc = new Scanner(System.in);
@@ -176,17 +186,18 @@ public class SimController {
 			}
 			else if (choice == 6)
 			{
+				return 0;
 				//run battle sim
-				System.out.println("Not made yet");
+		/*		System.out.println("Not made yet");
 				System.out.print("Enter Command: 0 to reshow command table: ");
-				choice = sc.nextInt();
+				choice = sc.nextInt();*/
 
 
 			}
 			else if (choice == 7)
 			{
-				sc.close();
-				break;
+				/*break;*/
+				return 1;
 			}
 			else
 			{
@@ -195,6 +206,7 @@ public class SimController {
 			}
 		}
 		System.out.println("Exiting battlemaps");
+		return players;
 	}
 
 	public static void move(int x, int y)

@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.simulation.SimController;
 import main.GloomhavenClone;
 import main.entity.Enemy;
 import main.entity.Entity;
@@ -102,12 +103,21 @@ public class World {
 					}
 
 					if(entity.getLocation().equals(player.getLocation())) {
-						if(entity instanceof Enemy) {
-							Enemy enemy = (Enemy) entity;
-							if(enemy.isAlive()) {
-								enemy.battle(gh, stream, gh.getScanner(), player);
-							}
+						if(entity instanceof Enemy)
+						{
+							/*SimController.runChoice(1);
+								int temp = SimController.run();*/
+							//tried to add my battle map, put was looping
+								Enemy enemy = (Enemy) entity;
+
+								if(enemy.isAlive())
+								{
+									enemy.battle(gh, stream, gh.getScanner(), player);
+								}
+
+
 						}
+
 					}
 				}
 

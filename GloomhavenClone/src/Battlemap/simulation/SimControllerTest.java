@@ -1,9 +1,7 @@
-package com.mycompany.gloomhaven.Battlemap.simulation;
+package com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.simulation;
 
-import com.mycompany.gloomhaven.Battlemap.Maps.Map;
-import com.mycompany.gloomhaven.Battlemap.Maps.Map1;
-
-import java.util.function.BooleanSupplier;
+import com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.Maps.Map;
+import com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.Maps.Map1;
 
 import static org.junit.jupiter.api.Assertions.*;
 

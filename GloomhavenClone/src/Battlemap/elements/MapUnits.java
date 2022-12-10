@@ -1,4 +1,4 @@
-package com.mycompany.gloomhaven.Battlemap.elements;
+package com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.elements;
 //Could be used when using simulation
 public class MapUnits {
 	private int pos[] = new int[4];

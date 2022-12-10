@@ -1,7 +1,7 @@
-package com.mycompany.gloomhaven.Battlemap.Maps;
+package com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.Maps;
 
-import com.mycompany.gloomhaven.Battlemap.elements.MapUnits;
-import com.mycompany.gloomhaven.Battlemap.elements.World;
+import com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.elements.MapUnits;
+import com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.elements.BattleWorld;
 
 import java.util.ArrayList;
 // The info on what tiles the boss can spawn wasnt added yet.
@@ -22,14 +22,14 @@ public class Map48 extends Map
 
 
 	ArrayList<MapUnits> allUnits;
-	public World world;
+	public BattleWorld battleWorld;
 
 	public Map48()
 	{
 
 		allUnits = new ArrayList<MapUnits>(numUnits);
 
-		world = new World(sizeX, sizeY, 0, 0);
+		battleWorld = new BattleWorld(sizeX, sizeY, 0, 0);
 		populateMap(); // creates map
 	}
 
@@ -81,7 +81,7 @@ public class Map48 extends Map
 
 		for (int i = 0; i < numUnits; i++)
 		{
-			this.world.placeUnitOnMap(allUnits.get(i).getX(), allUnits.get(i).getY(), allUnits.get(i).getType(), allUnits.get(i).getName());
+			this.battleWorld.placeUnitOnMap(allUnits.get(i).getX(), allUnits.get(i).getY(), allUnits.get(i).getType(), allUnits.get(i).getName());
 		}
 
 	}
@@ -102,29 +102,29 @@ public class Map48 extends Map
 	}
 	public void printMap()
 	{
-		world.printBattle();
+		battleWorld.printBattle();
 
 	}
 	public int getType(int x, int y)
 	{
-		return world.getType(x,y);
+		return battleWorld.getType(x,y);
 	}
 	public int getName(int x, int y)
 	{
-		return world.getName(x,y);
+		return battleWorld.getName(x,y);
 	}
 	public void placeUnitOnMap(int x, int y, int type, int name)
 	{
-		world.placeUnitOnMap(x,y,type,name);
+		battleWorld.placeUnitOnMap(x,y,type,name);
 
 	}
 	public void removeUnitFromTile(int x, int y)
 	{
-		world.removeUnitFromTile(x,y);
+		battleWorld.removeUnitFromTile(x,y);
 	}
 	public boolean hasUnit(int x, int y)
 	{
-		return world.hasUnit(x,y);
+		return battleWorld.hasUnit(x,y);
 	}
 
 

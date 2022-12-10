@@ -1,6 +1,6 @@
-package com.mycompany.gloomhaven.Battlemap.elements;
+package com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.elements;
 
-public class World {
+public class BattleWorld {
     private int sizeX;
     private int sizeY;
     private int type;
@@ -10,7 +10,7 @@ public class World {
     private PrintMap Printer;
     private boolean hasUnit;
 
-    public World(int sizeX, int sizeY,int type, int name)
+    public BattleWorld(int sizeX, int sizeY, int type, int name)
     {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
