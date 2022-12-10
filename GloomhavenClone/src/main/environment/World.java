@@ -105,16 +105,32 @@ public class World {
 					if(entity.getLocation().equals(player.getLocation())) {
 						if(entity instanceof Enemy)
 						{
-							/*SimController.runChoice(1);
-								int temp = SimController.run();*/
+							Enemy enemy = (Enemy) entity;
+									 if(enemy.isAlive())
+									 {
+										 SimController.runChoice(1);
+										 int temp = 0;
+										 while(temp == 0)
+										 {
+											 temp = SimController.run();
+
+											 if(temp ==1)
+											 {
+												 enemy.kill();
+
+											 }
+											 else
+											 {
+												 enemy.battle(gh, stream, gh.getScanner(), player);
+
+											 }
+
+									 }
+
+
+								 }
+
 							//tried to add my battle map, put was looping
-								Enemy enemy = (Enemy) entity;
-
-								if(enemy.isAlive())
-								{
-									enemy.battle(gh, stream, gh.getScanner(), player);
-								}
-
 
 						}
 

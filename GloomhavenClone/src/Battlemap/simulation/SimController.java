@@ -197,7 +197,7 @@ public class SimController {
 			else if (choice == 7)
 			{
 				/*break;*/
-				return 1;
+				return 1; // 1 will break the loop in the overworld map.
 			}
 			else
 			{

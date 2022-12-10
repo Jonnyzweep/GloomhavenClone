@@ -1,5 +1,7 @@
 # GloomhavenClone
 cs 401 project
+Run GloomhavenClone/src/main/GloomhavenClone.java
+
 Tasks for deadline 1: 11-21
 
     Join group of 3-4 students – tell me who is in the group, along with whatever username you will use on github so I know who is doing what. If you have more than one username there because of work/personal email, let me (and your group) know about that as well

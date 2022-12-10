@@ -55,6 +55,12 @@ public class Enemy extends Entity{
 		}
 		
 	}
+	public void kill()
+	{
+		this.setHealth(0.0); // made this so i can leave my battlemap loop
+
+	}
+
 	
 	@Override
 	public String getSymbol() {
