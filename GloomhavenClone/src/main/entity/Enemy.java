@@ -3,18 +3,22 @@ package main.entity;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import com.mycompany.gloomhaven.GloomhavenClone.src.Battlemap.simulation.SimController;
 import main.GloomhavenClone;
 import main.environment.Location;
 
 public class Enemy extends Entity{
+	public SimController map;
 
 	public Enemy(String symbol, Location location) {
 		super(symbol, location);
 		// TODO Auto-generated constructor stub
 	}
+
 	
 	public void battle(GloomhavenClone gh, PrintStream stream, Scanner scanner, Player player) {
 		this.setHealth(getMaxHealth());
+
 		
 		gh.print(stream, "You ran into a battle!");
 		boolean player_turn = false;

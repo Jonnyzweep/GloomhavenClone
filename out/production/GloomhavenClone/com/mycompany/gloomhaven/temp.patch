@@ -1,0 +1,1198 @@
+Index: Battlemap/Maps/Map.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Battlemap/Maps/Map.java b/Battlemap/Maps/Map.java
+--- a/Battlemap/Maps/Map.java	(revision eb61ce8aaa2b237fed00f19446734820e7a0e050)
++++ b/Battlemap/Maps/Map.java	(revision aaae48a86f3b2bc8ec9b62da2c776d06bb20f102)
+@@ -10,21 +10,22 @@
+ 
+     public World world;
+ 
++
+     public Map()
+     {
+         world = new World(0, 0, 0, 0);
+     }
+     public int getNumUnits()
+     {
+-        return 0;
++        return -1;
+     }
+     public int getType(int x, int y)
+     {
+-        return 0;
++        return -1;
+     }
+     public int getName(int x, int y)
+     {
+-        return 0;
++        return -1;
+     }
+     public void placeUnitOnMap(int x, int y, int type, int name)
+     {
+@@ -51,4 +52,16 @@
+     }
+ 
+ 
++    public int getSizeY()
++    {
++        return -1;
++    }
++    public int getSizeX() {
++        return -1;
++    }
++
++    public int getNumberOfEnemies()
++    {
++        return -1;
++    }
+ }
+Index: Battlemap/Maps/Map1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Battlemap/Maps/Map1.java b/Battlemap/Maps/Map1.java
+--- a/Battlemap/Maps/Map1.java	(revision eb61ce8aaa2b237fed00f19446734820e7a0e050)
++++ b/Battlemap/Maps/Map1.java	(revision aaae48a86f3b2bc8ec9b62da2c776d06bb20f102)
+@@ -197,6 +197,14 @@
+     {
+         return world.hasUnit(x,y);
+     }
++    public int getSizeX()
++    {
++        return sizeX;
++    }
++    public int getSizeY()
++    {
++        return sizeY;
++    }
+ 
+ 
+ 
+@@ -204,4 +212,9 @@
+     {
+         return numUnits;
+     }
++    public int getNumberOfEnemies()
++    {
++        return MapUnits.getNames();
++    }
++
+ }
+Index: Battlemap/Maps/Map48.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Battlemap/Maps/Map48.java b/Battlemap/Maps/Map48.java
+--- a/Battlemap/Maps/Map48.java	(revision eb61ce8aaa2b237fed00f19446734820e7a0e050)
++++ b/Battlemap/Maps/Map48.java	(revision aaae48a86f3b2bc8ec9b62da2c776d06bb20f102)
+@@ -133,6 +133,10 @@
+ 	{
+ 		return numUnits;
+ 	}
++	public int getNumberOfEnemies()
++	{
++		return MapUnits.getNames();
++	}
+ 
+ 
+ }
+\ No newline at end of file
+Index: Battlemap/elements/MapUnits.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Battlemap/elements/MapUnits.java b/Battlemap/elements/MapUnits.java
+--- a/Battlemap/elements/MapUnits.java	(revision eb61ce8aaa2b237fed00f19446734820e7a0e050)
++++ b/Battlemap/elements/MapUnits.java	(revision aaae48a86f3b2bc8ec9b62da2c776d06bb20f102)
+@@ -3,11 +3,15 @@
+ public class MapUnits {
+ 	private int pos[] = new int[4];
+ 
++
++	private static int names = 7; // for add enemy
++
+ 	public MapUnits(int setPosX, int setPosY, int setType, int setName) {
+ 		pos[0] = setPosX;
+ 		pos[1] = setPosY;
+ 		pos[2] = setType;
+ 		pos[3] = setName;
++
+ 	}
+ 
+ 	public void setPosition(int newPosX, int newPosY) {
+@@ -28,6 +32,10 @@
+ 	public int getName() {
+ 		return pos[3];
+ 	}
++	public static int getNames() {
++		return names;
++	}
++
+ 
+ 	public String geteType() // no need yet to get name
+ 	{
+Index: Battlemap/elements/PrintMap.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Battlemap/elements/PrintMap.java b/Battlemap/elements/PrintMap.java
+--- a/Battlemap/elements/PrintMap.java	(revision eb61ce8aaa2b237fed00f19446734820e7a0e050)
++++ b/Battlemap/elements/PrintMap.java	(revision aaae48a86f3b2bc8ec9b62da2c776d06bb20f102)
+@@ -30,7 +30,7 @@
+         this.maxY = maxY;
+         this.theMap = map;
+ 
+-        System.out.println("Battle Map 84:");
++        System.out.println("");
+         System.out.print("Y coordinate are the white numbers and ");
+         System.out.print(ANSI_CYAN + "X coordinate are the cyan numbers:" + ANSI_RESET);
+         for(int y= 0; y < maxY; y++)
+Index: Battlemap/simulation/SimController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Battlemap/simulation/SimController.java b/Battlemap/simulation/SimController.java
+--- a/Battlemap/simulation/SimController.java	(revision eb61ce8aaa2b237fed00f19446734820e7a0e050)
++++ b/Battlemap/simulation/SimController.java	(revision aaae48a86f3b2bc8ec9b62da2c776d06bb20f102)
+@@ -4,7 +4,9 @@
+ import com.mycompany.gloomhaven.Battlemap.Maps.Map;
+ import com.mycompany.gloomhaven.Battlemap.Maps.Map1;
+ import com.mycompany.gloomhaven.Battlemap.Maps.Map48;
++import com.mycompany.gloomhaven.Battlemap.elements.MapUnits;
+ 
++import java.util.InputMismatchException;
+ import java.util.Scanner;
+ //Created by Jonny
+ //Could add on option to print map scenario infomation and rules for the specific map, but not important now
+@@ -20,10 +22,35 @@
+ 
+ 		Scanner sc = new Scanner(System.in);
+ 
+-		System.out.println("Maps currently made are: 1, 48.");
+-		System.out.print("Enter Map number to load:  ");
+-		int map = sc.nextInt();
++
++		int map= 0;
++		int trying = 0;
++		while(trying == 0)
++		{
++			System.out.println("Maps currently made are: 1, 48.");
++			try
++			{
++
++				System.out.print("Enter Map number to load:  ");
++				map = sc.nextInt();
++
++			}
++			catch (InputMismatchException e)
++			{
++				System.err.println("Wrong input! Input only integer numbers please...");
++				sc.nextLine();
++			}
++			if(map == 1 || map == 48)
++			{
++				break;
++			}
++			else
++			{
++				System.out.println("Invalid map number.");
+ 
++			}
++
++		}
+ 
+ 		if(map == 1)
+ 		{
+@@ -34,6 +61,7 @@
+ 			sim = new Map48();
+ 		}
+ 
++		System.out.println("Loaded Map " + map + ":");
+ 
+ 		run();
+ 
+@@ -61,8 +89,27 @@
+ 				System.out.println("Map Legend:         5");
+ 				System.out.println("Battle sim:         6");
+ 				System.out.println("Exit Battle:        7");
+-				System.out.print("Enter Command:      ");
+-				choice = sc.nextInt();
++
++
++
++				int trying = 0;
++				while(trying == 0)
++				{
++					System.out.print("Enter Command: ");
++					try
++					{
++						choice = sc.nextInt();
++						break;
++					}
++					catch (InputMismatchException e) // catching non ints
++					{
++						System.err.println("Wrong input! Input only integer numbers please...");
++						System.out.println();
++						sc.nextLine();
++					}
++
++				}
++
+ 			}
+ 			else if (choice == 1)
+ 			{
+@@ -82,8 +129,22 @@
+ 			}
+ 			else if (choice == 3)
+ 			{
+-				System.out.print("Enter 1 to add player: Enter anything else to add enemy: ");
+-				int c = sc.nextInt();
++				int c = 0;
++
++
++				int trying = 0;
++				while(trying == 0) {
++					try {
++						System.out.print("Enter 1 to add player: Enter anything else to add enemy: ");
++						c = sc.nextInt();
++						break;
++					} catch (InputMismatchException e) // catching non ints
++					{
++						System.err.println("Wrong input! Input only integer numbers please...");
++						System.out.println();
++						sc.nextLine();
++					}
++				}
+ 				if(c == 1)
+ 				{
+ 					players = addPlayer(players);
+@@ -124,18 +185,16 @@
+ 			}
+ 			else if (choice == 7)
+ 			{
+-				whileV = 1;
+ 				sc.close();
+ 				break;
+ 			}
+ 			else
+ 			{
+ 				System.out.println("Error: Not a valid command enter, returning to commands");
+-				System.out.print("Enter Command: 0 to reshow command table: ");
+-				choice = sc.nextInt();
++				choice = 0;
+ 			}
+ 		}
+-		System.out.println("Exiting battlemap");
++		System.out.println("Exiting battlemaps");
+ 	}
+ 
+ 	public static void move(int x, int y)
+@@ -145,66 +204,162 @@
+ 		{
+ 
+ 			Scanner sc = new Scanner(System.in);
+-			System.out.print("Enter new x coordinate: ");
+-			int newX = sc.nextInt();
+-			System.out.print("Enter new y coordinate: ");
+-			int newY = sc.nextInt();
+-			if(sim.hasUnit(newX -1, newY -1) == false)
+-			{
+-				sim.placeUnitOnMap(newX -1,newY -1,sim.getType(x -1,y -1), sim.getName(x -1,y -1));
+-				sim.removeUnitFromTile(x - 1,y - 1);
+-				whileV = 1;
++			int newY= -1;
++			int newX = -1;
++			int error = 0;
++
++			int trying = 0;
++			while(trying == 0)
++			{
++				try
++				{
++					System.out.print("Enter new x coordinate: ");
++					newX = sc.nextInt();
++					System.out.print("Enter new y coordinate: ");
++					newY = sc.nextInt();
++					break;
++				}
++				catch (InputMismatchException e) // catching non ints
++				{
++					System.err.println("Wrong input! Input only integer numbers please...");
++					System.out.println();
++					sc.nextLine();
++				}
++
++			}
++			if(((newX - 1) >=0 ) && ((newY - 1) >=0 ))
++			{
++				if(sim.hasUnit(newX -1, newY -1) == false)
++				{
++					sim.placeUnitOnMap(newX -1,newY -1,sim.getType(x -1,y -1), sim.getName(x -1,y -1));
++					sim.removeUnitFromTile(x - 1,y - 1);
++					whileV = 1;
++				}
++				else
++				{
++					System.out.println("Error: There is a unit on given tile");
++					error = 1;
++
++
++				}
++
+ 			}
+ 			else
+ 			{
+-				System.out.print("Error: There is a unit on given tile; to skip this unit press 1:  to give new coordinates press any other number: ");
+-				int c = sc.nextInt();
+-				if(c == 1)
++				System.out.println("Error: negative coordinate, only positive");
++				error = 1;
++			}
++			if(error == 1)
++			{
++				int c = 0;
++				while (trying == 0)
++				{
++
++					try {
++						System.out.print("to return to command table press 1:  to give new coordinates press any other number:  ");
++						c = sc.nextInt();
++						break;
++					} catch (InputMismatchException e) // catching non ints
++					{
++						System.err.println("Wrong input! Input only integer numbers please...");
++						System.out.println();
++						sc.nextLine();
++					}
++				}
++				if (c == 1)
+ 				{
+-					whileV =3;
++					whileV = 3;
+ 				}
+ 			}
+ 
++
++
+ 		}
+ 
+ 	}
+ 	public static void moveChoice() // moving one unit at a time
+ 	{
+ 		int whileV = 0;
+-		while(whileV == 0)
+-		{
++		while (whileV == 0) {
+ 			Scanner sc = new Scanner(System.in);
+-			System.out.print("Enter current x coordinate: ");
+-			int oldX = sc.nextInt();
+-			System.out.print("Enter current y coordinate: ");
+-			int oldY = sc.nextInt();
+-			if(sim.hasUnit(oldX - 1, oldY -1) == true) // all the minus 1 are for because all arrays start at 0
++			int oldX = -1;
++			int oldY = -1;
++			int error =0;
++			int trying = 0;
++			while (trying == 0)
+ 			{
+-				move(oldX,oldY);
+-				whileV =3;
++				try {
++					System.out.print("Enter new x coordinate: ");
++					oldX = sc.nextInt();
++					System.out.print("Enter new y coordinate: ");
++					oldY = sc.nextInt();
++					break;
++				} catch (InputMismatchException e) // catching non ints
++				{
++					System.err.println("Wrong input! Input only integer numbers please...");
++					System.out.println();
++					sc.nextLine();
++				}
++			}
++			if(((oldX - 1) >=0) &&((oldY - 1) >=0))
++			{
++				if (sim.hasUnit(oldX - 1, oldY - 1) == true && (sim.getType(oldX-1,oldY-1) != 20)) // all the minus 1 are for because all arrays start at 0
++				{
++					move(oldX, oldY);
++					whileV = 3;
++				}
++				else
++				{
++					error = 1;
++					System.out.println("Error: No unit on given tile ");
++
++				}
+ 			}
+ 			else
+ 			{
+-				System.out.print("Error: No unit on given tile; to return to command table press 1:  to give new coordinates press any other number: ");
+-				int c = sc.nextInt();
+-				if(c == 1)
++				System.out.println("Error: negative coordinate, only positive; ");
++				error = 1;
++
++			}
++			if(error == 1)
++			{
++				int c = 0;
++				while (trying == 0)
++				{
++
++					try {
++						System.out.print("to return to command table press 1:  to give new coordinates press any other number:  ");
++						c = sc.nextInt();
++						break;
++					} catch (InputMismatchException e) // catching non ints
++					{
++						System.err.println("Wrong input! Input only integer numbers please...");
++						System.out.println();
++						sc.nextLine();
++					}
++				}
++				if (c == 1)
+ 				{
+-					whileV =3;
++					whileV = 3;
+ 				}
+ 			}
+ 
++
++
+ 		}
+ 
+ 	}
++
+ 
+ 	public static void moveAll()
+ 	{
++		Scanner sc = new Scanner(System.in);
+ 		int indexX[] = new int[sim.getNumUnits()];
+ 		int indexY[] = new int[sim.getNumUnits()];
+ 		int tracker  = 0;
+-		for(int y= 0; y < sim.world.getSizeY() ; y++)
++		for(int y= 0; y < sim.getSizeY() ; y++)
+ 		{
+-			for(int x = 0; x < sim.world.getSizeX(); x++)
++			for(int x = 0; x < sim.getSizeX(); x++)
+ 			{
+ 				if(sim.getType(x,y) == 8)
+ 				{
+@@ -212,12 +367,39 @@
+ 					indexY[tracker] = (y+1);
+ 					tracker += 1;
+ 				}
++				else if(sim.getType(x,y) == 9)
++				{
++					indexX[tracker] = (x+1); // adding one so its gives the x as a human would enter it (x starting at 1)
++					indexY[tracker] = (y+1);
++					tracker += 1;
++				}
+ 			}
+ 		}
+ 		for( int i =0; i < tracker; i++)
+ 		{
+-			System.out.println("Moving unit at (" +indexX[i]+", " +indexY[i] +"): To skip this unit enter the same coordinates given and press 1");
+-			move(indexX[i], indexY[i]);
++			int trying = 0;
++			int c = 1;
++			while (trying == 0)
++			{
++				try
++				{
++					System.out.println("Moving unit at (" +indexX[i]+", " +indexY[i] +"): To skip this unit enter the same coordinates press 1");
++					c = sc.nextInt();
++					break;
++				}
++				catch (InputMismatchException e) // catching non ints
++				{
++					System.err.println("Wrong input! Input only integer numbers please...");
++					System.out.println();
++					sc.nextLine();
++				}
++			}
++			if (c != 1)
++			{
++				move(indexX[i], indexY[i]);
++
++			}
++
+ 		}
+ 
+ 	}
+@@ -229,11 +411,27 @@
+ 		while(whileV == 0)
+ 		{
+ 			Scanner sc = new Scanner(System.in);
+-			System.out.println("Enter the coordinates where you want new player to be :");
+-			System.out.print("X = ");
+-			int newX = sc.nextInt();
+-			System.out.print("Y = ");
+-			int newY = sc.nextInt();
++			int error =0;
++			int newX= -1;
++			int newY = -1;
++			int trying = 0;
++			while (trying == 0)
++			{
++				try {
++					System.out.println("Enter the coordinates where you want new player to be :");
++					System.out.print("X = ");
++					newX = sc.nextInt();
++					System.out.print("Y = ");
++					newY = sc.nextInt();
++					break;
++				} catch (InputMismatchException e) // catching non ints
++				{
++					System.err.println("Wrong input! Input only integer numbers please...");
++					System.out.println();
++					sc.nextLine();
++				}
++			}
++
+ 			if(sim.getType(newX -1, newY -1) == 0)
+ 			{
+ 				if(sim.getName(newX-1,newY-1) == 1)
+@@ -241,27 +439,45 @@
+ 					players +=1; // adding one so it will start the first player as 1 on the map
+ 					sim.placeUnitOnMap(newX - 1, newY -1, 9, players);
+ 					whileV = 4;
+-
+ 				}
+ 				else
+ 				{
+-					System.out.print("Error: Not a Starting tile, [!]; to return to command table press 1:  to give new coordinates press any other number: ");
+-					int c = sc.nextInt();
+-					if (c == 1) {
+-						whileV = 3;
+-					}
++					System.out.print("Error: Not a Starting tile, [!];  ");
++					error = 1;
++
+ 				}
+ 
+ 			}
+ 			else
+ 			{
+-				System.out.print("Error: Not a Starting tile; to return to command table press 1:  to give new coordinates press any other number: ");
+-				int c = sc.nextInt();
+-				if (c == 1) {
++				System.out.print("Error: Not a Starting tile; ");
++				error = 1;
++
++			}
++			if(error == 1)
++			{
++				int c = 0;
++				while (trying == 0)
++				{
++
++					try {
++						System.out.print("to return to command table press 1:  to give new coordinates press any other number:  ");
++						c = sc.nextInt();
++						break;
++					} catch (InputMismatchException e) // catching non ints
++					{
++						System.err.println("Wrong input! Input only integer numbers please...");
++						System.out.println();
++						sc.nextLine();
++					}
++				}
++				if (c == 1)
++				{
+ 					whileV = 3;
+ 				}
+ 			}
+-		}
++
++			}
+ 		return players;
+ 	}
+ 	public static void addEnemy() {
+@@ -269,53 +485,148 @@
+ 		while (whileV == 0) {
+ 
+ 			Scanner sc = new Scanner(System.in);
+-			System.out.print("Enter x coordinate for new enemy:");
+-			int newX = sc.nextInt();
+-			System.out.print("Enter y coordinate for new enemy: ");
+-			int newY = sc.nextInt();
+-			System.out.print("Enter number for enemy name: (refer to map cheatsheet for numbers) "); // need to add a better system later
+-			int newName = sc.nextInt();
+-			if (sim.hasUnit(newX - 1, newY - 1) == false) {
+-				sim.placeUnitOnMap(newX - 1, newY - 1, 8, newName);
+-				whileV = 3;
+-			} else {
+-				System.out.print("Error: There is a unit on given tile; to return to command table press 1:  to give new coordinates press any other number: ");
+-				int c = sc.nextInt();
+-				if (c == 1) {
+-					whileV = 3;
+-
+-				}
++			int newX = -1;
++			int newY = -1;
++			int newName = -1;
++			int error = 0;
++			int trying = 0;
++			while (trying == 0)
++			{
++				try {
++
++					System.out.print("Enter x coordinate for new enemy:");
++					newX = sc.nextInt();
++					System.out.print("Enter y coordinate for new enemy: ");
++					newY = sc.nextInt();
++					System.out.print("Enter number for enemy name: (refer to map cheatsheet for numbers) "); // need to add a better system later
++					newName = sc.nextInt();
++					break;
++				} catch (InputMismatchException e) // catching non ints
++				{
++					System.err.println("Wrong input! Input only integer numbers please...");
++					System.out.println();
++					sc.nextLine();
++				}
++			}
++				if (((newX - 1) >= 0) && ((newY - 1) >= 0)) {
++					if (sim.hasUnit(newX - 1, newY - 1) == false) {
++						if (newName <= sim.getNumberOfEnemies() && newName >= 0) {
++							sim.placeUnitOnMap(newX - 1, newY - 1, 8, newName);
++							whileV = 3;
++						} else {
++							System.out.println("Error: name number is not valid");
++							error = 1;
++						}
++
++					} else {
++						System.out.print("Error: There is a unit on given tile;  ");
++						error = 1;
++					}
++				} else {
++					System.out.println("Error: negative coordinate, only positive");
++					error = 1;
++
++				}
++				if (error == 1) {
++					int c = 0;
++					while (trying == 0) {
++
++						try {
++							System.out.print("to return to command table press 1:  to give new coordinates press any other number:  ");
++							c = sc.nextInt();
++							break;
++						} catch (InputMismatchException e) // catching non ints
++						{
++							System.err.println("Wrong input! Input only integer numbers please...");
++							System.out.println();
++							sc.nextLine();
++						}
++					}
++					if (c == 1) {
++						whileV = 3;
++					}
+ 
+-			}
+-		}
+-	}
++				}
++
++
++			}
++		}
++
+ 
+ 	public static void removeUnit()
+ 	{
++		Scanner sc = new Scanner(System.in);
++
++
+ 		int whileV = 0;
+ 		while(whileV == 0)
+ 		{
+-			Scanner sc = new Scanner(System.in);
+-			System.out.println("Enter the coordinates of the unit you want to remove:");
+-			System.out.print("X = ");
+-			int newX = sc.nextInt();
+-			System.out.print("Y = ");
+-			int newY = sc.nextInt();
+-			if(sim.hasUnit(newX -1, newY -1) == true)
++			int error =0;
++			int newX= -1;
++			int newY = -1;
++			int trying = 0;
++
++
++			while (trying == 0)
++			{
++				try {
++					System.out.println("Enter the coordinates of the unit you want to remove:");
++					System.out.print("X = ");
++					newX = sc.nextInt();
++					System.out.print("Y = ");
++					newY = sc.nextInt();
++					break;
++				} catch (InputMismatchException e) // catching non ints
++				{
++					System.err.println("Wrong input! Input only integer numbers please...");
++					System.out.println();
++					sc.nextLine();
++				}
++			}
++			if(((newX - 1) >=0 ) && ((newY - 1) >=0 ))
+ 			{
+-				 // adding one so it will start the first player as 1 on the map
+-				sim.removeUnitFromTile(newX - 1, newY -1);
+-				whileV = 4;
++				if(sim.hasUnit(newX -1, newY -1) == true && sim.getType(newX-1,newY-1) !=20)
++				{
++					// adding one so it will start the first player as 1 on the map
++					sim.removeUnitFromTile(newX - 1, newY -1);
++					whileV = 4;
++				}
++				else
++				{
++					System.out.print("Error: No unit on given tile  ");
++					error = 1;
++				}
+ 
+ 			}
+ 			else
+ 			{
+-				System.out.print("Error: No unit on given tile; to return to command table press 1:  to give new coordinates press any other number: ");
+-				int c = sc.nextInt();
+-				if (c == 1) {
++				System.out.println("Error: negative coordinate, only positive ");
++				error = 1;
++			}
++			if(error == 1)
++			{
++				int c = 0;
++				while (trying == 0)
++				{
++
++					try
++					{
++						System.out.print("to return to command table press 1:  to give new coordinates press any other number:  ");
++						c = sc.nextInt();
++						break;
++					} catch (InputMismatchException e) // catching non ints
++					{
++						System.err.println("Wrong input! Input only integer numbers please...");
++						System.out.println();
++						sc.nextLine();
++					}
++				}
++				if (c == 1)
++				{
+ 					whileV = 3;
+ 				}
+ 			}
++
+ 		}
+ 
+ 	}
+Index: Battlemap/simulation/SimControllerTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Battlemap/simulation/SimControllerTest.java b/Battlemap/simulation/SimControllerTest.java
+new file mode 100644
+--- /dev/null	(revision aaae48a86f3b2bc8ec9b62da2c776d06bb20f102)
++++ b/Battlemap/simulation/SimControllerTest.java	(revision aaae48a86f3b2bc8ec9b62da2c776d06bb20f102)
+@@ -0,0 +1,38 @@
++package com.mycompany.gloomhaven.Battlemap.simulation;
++
++import com.mycompany.gloomhaven.Battlemap.Maps.Map;
++import com.mycompany.gloomhaven.Battlemap.Maps.Map1;
++
++import java.util.function.BooleanSupplier;
++
++import static org.junit.jupiter.api.Assertions.*;
++
++class SimControllerTest {
++
++    @org.junit.jupiter.api.Test
++    void main()
++    {
++
++        // make sure it loading the right class info, default map returned negative 1
++        Map sim;
++        sim = new Map1();
++
++        int type = sim.getType(1,1);
++        int name = sim.getName(1,1);
++        int numUnits = sim.getNumUnits();
++        int numNames = sim.getNumberOfEnemies();
++        int x = sim.getSizeX();
++        int y = sim.getSizeY();
++
++        assertTrue(type >= 0);
++        assertTrue(name >= 0);
++        assertTrue(x >= 0);
++        assertTrue(y >= 0);
++        assertTrue(numNames >= 0);
++        assertTrue(numUnits >= 0);
++        assertTrue( sim.hasUnit(1,3));
++
++    }
++
++
++}
+\ No newline at end of file
+Index: GloomhavenClone.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/GloomhavenClone.iml b/GloomhavenClone.iml
+--- a/GloomhavenClone.iml	(revision eb61ce8aaa2b237fed00f19446734820e7a0e050)
++++ b/GloomhavenClone.iml	(revision aaae48a86f3b2bc8ec9b62da2c776d06bb20f102)
+@@ -7,5 +7,21 @@
+     </content>
+     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="module-library">
++      <library name="JUnit5.8.1">
++        <CLASSES>
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar!/" />
++        </CLASSES>
++        <JAVADOC />
++        <SOURCES />
++      </library>
++    </orderEntry>
+   </component>
+ </module>
+\ No newline at end of file
+diff --git a/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/Maps/Map.class b/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/Maps/Map.class
+index e2795d5b1465d4be1c301c79b7053c85f74c9fbb..24a848c57105c8b201b812fecc6a91c5d2c3dbab
+GIT binary patch
+literal 1518
+zc$}3|+iuf95S_K1I8D>0qy-8TXt*Z5SrvUjROKcrRSL~RLZG~D(<O1`n;fSQzKNGU
+zph_U|0elqV?8bGg%A&^7?##~koHMgKzyJLBMMPV)RwRvdlZ+DOD9>o-kRNf&;a<;b
+z?jMS7#3;XMdv>(NNUzm9CKVX1cYW7#N7w`IjjW#I`);2f3D0`PqsS314=e#Ayl7y(
+z_e1BPNG27f#3UoLwu7(UnV>0}HmO{q8M?w~IRoii9t`BhDEC>?GJ4YZ?^>QQGG6-!
+zf>F6)dt!I!?u)R^_Z>tk4Zq8s4i9a4j)O+jw+D<?vq+s*2$9L2h(P`hmp4$Cw}ajh
+zYmWku=5Px#!oFZhI~r$qxr^*{;P9@H(59#QH6n#FJe975!u5|-emnHtw(XoUcEHl-
+z1DS~<A5lr*2SbNPLQ&-%(Gwo-t`LN_7pYhQ$}Rh=*gJDSKxW(luBZ9wjVD}NppjzB
+zABJ7AtuzZjugQ_2Dqd5=NTCz?p75sNVWzNGaN5QMFxa`J6Jkq0$=uWNozTR0Djg%P
+z(Jc09(y^Dx0LLs?=5Q*FadefgDgNs;A9JoKHDI-G2}3^q`wXci$QyJsM!ta6Q<3uu
+zxj4?oNa@|8g_!L&JPrPx3~URT+3wP0%+|un$$F13kX04g#yFXfv4o7pWYSxNrz@`t
+z&w#y0_hW(QSbCbk!*kXCOMuY>{ClBy<6`f%%)LKKres;Eq?ERH?m=1dppP#HuBQTP
+gmjgFaf%Oc-_cV3*mNFnWQ<2LVkS|k_E9$iR7ZZ=nEdT%j
+
+diff --git a/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/Maps/Map1.class b/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/Maps/Map1.class
+index b44be84e1637c238ddd11a9a21a9a9a7ee78907b..3ec113fd5c11f0f08d84e0137f00bf9102682e5d
+GIT binary patch
+literal 6234
+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
+
+diff --git a/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/Maps/Map48.class b/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/Maps/Map48.class
+index 6c2cab42dc2739b66b43f63679c3d0752b28d133..99aaf5f15227de475ff970423104de5b86347be9
+GIT binary patch
+literal 4130
+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
+
+diff --git a/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/elements/MapUnits.class b/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/elements/MapUnits.class
+index afbcb9b5358aa39209bcb4ebbcae3d3f38f10032..9c121966a06f9fbce404d3aea4fd3370a5095ea1
+GIT binary patch
+literal 2255
+zc$}S8U1(cn7=BKgpVKs1o2>2J+Rap_OFGwB*Ujl_wLj|?&Dz>_rEUnGrl-kilXJq!
+zNlPapB3_87h$1pXhlq$4$(%zG*@fVZH-fhcUJ8Qug6MqCcfKZZtv5FCo%i|P|Mz)6
+z`u*Qu-vls%`7nHF3Beyh06_&EtJ=DjE^1~zJ-xK5=NtvWVZ$_>5d|&D)Iuv%w1yCl
+zpbZfPLpiIIE^YEGYvyJ;U$m@JL0i|&^qA&2MZKhz(>g!8=~U9^wekf<sxVU7;_17T
+zal`G2pdB3w0;X2dd97qr#0e)X%dV*CRG^Mqwrwn1wu){l=54J^#T^P_=d{b3y=+x0
+z2}ieW%`jCQ;Pr&DvSQ?_MW=DytDtpysp4q4qE6>Sj5=@YTBU01DiR7pGevDvcN5;l
+z`m$DD#bE{hv1+BD;$BL$re%`(a|ONPsOT5@ZQI(=?L@|0;ib+B?^6(-v}~e8rc_oj
+zprGxHW;=z%gkG{($^A5#(CoFutg-AmJfI*lrkTrzlQ>&tH!6k{MCHw>&1^I}Nu#W>
+zZkYMRm}R<S3MDiAOD(Xpacfyu(4I9+eX3eo((QR|smPmn*2-zc1<f{GEHC{|!Jzxe
+z?Ej(eH1k$;XU3{5)}^OBX@0Y;d(sqnWYeD3a16`j(2`!QAyeOw-kwBne_nSM#d>8t
+z;6}{XBj&dws#2<WqVDNClc{WDY3Cf9Gh&(1Ia0mGx@FtKLsph=uFRiIU1DB!I9HT=
+z9-gzRc21u(T)*gc>jQ2Q^l@Q*d^tY;_yQ<}-R<SK4eSyR@;pWKCR&JqRR5Py`a|D@
+zZy?nF1wt)7)9%OLD?WjP;uGxhPhS&3AL4lkA)c-9^Vi1kai05`DuF1HO!hFfLtb#4
+z#xNkHM_7a+q!CI!Aw5c|MM#fP@>4&GF<IaRYFu6WzpHALu}7%mEM_m|PLVd@xzy9P
+zV_c?f$An0$;0z{Zia~)P8z0!JhYpJCeIjJUGm#+`oZa2szr(#}SNC(fy9ai-AKKMD
+zv%7n6hkM^H?yY#d?%pdjfd6wuw?ycM?_r)#AS*3@m5EATo&Ku`#$z=P1YEFJf}jh!
+zBnY`+p9HE4_Dj$q?0UA5Fg&=8gyo$zrN)FUqNGX0cpl}R9piqb$;u!O;5dssfg@b!
+zL0S#5!4YoQC^st0bDFeYB+*ZktpaDZ#@og?N^%_M#p6(;5&lJ^QR=3)n^u03P2c*j
+zren=b$C{gtHJa}6xVggHzM3a9Qb1{%L~q07?uJP)eoxbU;tiW4wR(JaR$4=oYW6-V
+zfhhHu1ftZm1Y*#G5_psx-$tU16C|ODhW9vZV1@&mB@K(D;UZ~xhBPculP3)ZX)sAc
+znM1d^X%6PGjs-jm4bNc}&vWoEU;{7WGG4|@cm=QFRlI@M@fLsY<86G5ckn5$;0E5s
+zSIqb=uHrj<fFJN7e#A%knHIm`6a0oP{EpA?2Wt2e*YOvv8}#04qPG)qm)@?n?nt+<
+z+asF)z_}nZa=X(|gjc}ry>{Cpy4e&qAj7J7QfN<!H|jm2U`OaWqStPFMj@WFBI4XX
+DVeylS
+
+diff --git a/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/elements/PrintMap.class b/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/elements/PrintMap.class
+index c1a7bce6fb7cd482183c6832dafc4bab04fd6b34..cf86b299cd148802a691eafa0023c6a3d501f727
+GIT binary patch
+literal 4523
+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
+F_&=GW{oMcn
+
+diff --git a/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/simulation/SimController.class b/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/simulation/SimController.class
+index 004cf7e2eb38bb64fee7ddc88501873cc86d7d0d..f24c292a324e9c1dcb6f3cf823afa41b6114cd5b
+GIT binary patch
+literal 8780
+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
+VRzK+9ANd^wx(BC=!Ed1f{|{W;!wdib
+
+diff --git a/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/simulation/SimControllerTest.class b/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/simulation/SimControllerTest.class
+new file mode 100644
+index 0000000000000000000000000000000000000000..fddbe23c0400d762076a9d58608cee4933d24ace
+GIT binary patch
+literal 1273
+zc$}qF-A)rx5dIF`cI$SrSoxKL2#PHgR#fT_{}M@>R7q%UfOz4d9_hjEZnL{3mUyRc
+z;RAT>4H!*)03S-7v#q9yUSQm|bH155=bM=`JN@?k^H%^XSToRrhz`v}6fuUrLw>}q
+zI(H7Nt^Gq$4H#le(viUmLnM=}=!i4isJgagw@5a))3Ofgu4~u$k#MYsJP7K-<_+sH
+zZ}>{g8_*FkkbtS9*Ti`w8FK$Xz@Q(9pxkN*hG?cx$QBgY1rsU7q<l}fEtIX_!~g~v
+z63W)JpHkL-n00t!*u;qPrrO?p;cdNq<Oo{|U%5w3q?J2P?vgwfJIXk2;&Qif*T5A_
+z>X<Td71tOhT<^d-Y*HYS4H*c};tgr7`@Zl3={gkN;Gt6Xnv}nm*~?ZG@pTg!WGVd`
+z_f?*q()M)Z7*@}4JHE7=b*^GqC24QCPT;xqy70=vCo*lreL>-pMd^rkt!2JnCrhg6
+zR(ZX`J*o7LQ44C4GF>nJXWT`ivbl8V&S@LN>{$qZwOJhw!X~o<L5F%u_wM{|qk^i@
+z1leo)wHSI!0k6KIvz<Cdwwq2MZBdcFB*VJnxB>69Azl1?t2%ibCAaBS#imp|gMU;u
+zr=|iEn4w`&kCHSlpiv-X(aMx%<`nE>=$<7R3ylWmNSf^pwDo34Fi+kdb(rlSf;d^;
+zeSyAvigU%Brk%i84wt@_+zBq`HIhU5D9KCt7|F4`o_-Hq`v5KS2@_*ocp%oT=-o=R
+zThY3doEAI5Gy#=+B+PvUNs=kbte+4~6@Ahe!X$?2#T}uVM)80wn;1h0<9JSUV$%g3
+z(|o+eR9N$NyRJ^nalFAT+@^a-qKP|Lp!x^lAWtYlOf}pkq)~)@+#?jFIL~mOP>k3r
+r6m5b2NEV4{8s-l=7S}POBf-K4SYyT-OLTp))ak)8t&A#CeOdhp!-pJf
+
+diff --git a/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/elements/Enemies.class b/out/production/GloomhavenClone/com/mycompany/gloomhaven/Battlemap/elements/Enemies.class
+deleted file mode 100644
+index 966a772902de788c72bc06c20c649987d1f0c725..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
